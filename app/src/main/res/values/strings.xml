@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ strings.xml
+  ~ NfcLibrary project.
+  ~
+  ~ Created by : Daneo van Overloop - 17/6/2014.
+  ~
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 AppFoundry. All rights reserved.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  -->
+
+<resources>
+
+  <string name="app_name">NfcLibrary Implementation</string>
+  <string name="hello_world">Hello world!</string>
+  <string name="action_settings">Settings</string>
+  <string name="bluetooth_not_present_exception">Bluetooth is not supported by this device!</string>
+  <string name="title_activity_nfc">NfcActivity</string>
+  <string name="btn_write_email_nfc">Write email</string>
+  <string name="btn_write_sms_text">Write an SMS</string>
+  <string name="btn_write_geolocation_nfc_text">Write Geolocation</string>
+  <string name="btn_write_uri_nfc_text">Write URI</string>
+  <string name="btn_write_tel_nfc_text">Write Tel</string>
+  <string name="btn_write_bluetooth_nfc_text">Write Bluetooth MAC</string>
+  <string name="progressdialog_waiting_for_tag">Waiting for tag…</string>
+  <string name="progressdialog_waiting_for_tag_message">Tap tag to write…</string>
+    <string name="no_input">You should give me something to write</string>
+
+</resources>

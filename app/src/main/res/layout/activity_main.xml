@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <EditText
+                android:id="@+id/input_text_email_target"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/btn_write_email_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/btn_write_email_nfc" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/input_text_sms_target"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/btn_write_sms_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/btn_write_sms_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/input_text_tel_target"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:inputType="phone"/>
+
+            <Button
+                android:id="@+id/btn_write_tel_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/btn_write_tel_nfc_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/geolocation_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/input_text_geo_lat_target"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight=".50"
+                    android:inputType="numberDecimal" />
+
+                <View
+                    android:id="@+id/centerShim"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/input_text_geo_long_target"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight=".50"
+                    android:inputType="numberDecimal" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_write_geolocation_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/btn_write_geolocation_nfc_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/input_text_uri_target"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:inputType="textUri" />
+
+            <Button
+                android:id="@+id/btn_write_uri_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/btn_write_uri_nfc_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/input_text_bluetooth_address"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Button
+                android:id="@+id/btn_write_bluetooth_nfc"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/btn_write_bluetooth_nfc_text" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
