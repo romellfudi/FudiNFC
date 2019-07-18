@@ -26,12 +26,17 @@ dependencies {
 }
 ```
 
+Add the following to your AndroidManifest.xml file :
+```xml
+	 <uses-permission android:name="android.permission.NFC" />
+```
+
 Now go to the created activity, and either
 
 * Implement [FGD] yourself
 
 ```java
-	public class MyActivity{
+... inner activity
 	    private PendingIntent pendingIntent;
     	private IntentFilter[] mIntentFilters;
    		private String[][] mTechLists;
@@ -59,29 +64,13 @@ Now go to the created activity, and either
             	mNfcAdapter.disableForegroundDispatch(this);
         	}
         }
-	}
+		...
 
 ```
-* Or extend from NfcActivity:
 
-```java    
-	public class MyActivity extends NfcActivity{    	
-    	protected void onCreate(Bundle savedInstanceState){
-    		super.onCreate(savedInstanceState);
-    		setContentView(R.layout.activity_main);
-    	}
-    }
-```
+## Reading
 
-
-* **In both cases, add the following to your AndroidManifest.xml file :**
-```xml
-	 <uses-permission android:name="android.permission.NFC" />
-```
-
-## Start Reading
-
-* Paste this in the activity if you're **extending our class** :
+Paste this in the activity if you're **extending our class** :
 
 
 ```java
@@ -121,12 +110,12 @@ Now go to the created activity, and either
 * Now you're able to read the NFC Tags as long as the library supports the data in it when held to your phone!
 
 ## Write to a tag
-* Let your activity implement `AsyncUiCallback`:
+* Let your activity implement `TaskCallback`:
 
 
 ```java
     @Override
-    public void callbackWithReturnValue(Boolean result) {
+    public void  onReturn(Boolean result) {
         String message = result ? "Success" : "Failed!";
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
@@ -142,10 +131,10 @@ Now go to the created activity, and either
     }
 ```
 
-* Create a field with an `AsyncOperationCallback` in the following way :
+Create a field with an `TaskCallback` in the following way :
 
 ```java
-	AsyncOperationCallback mAsyncOperationCallback = new AsyncOperationCallback() {
+	TaskCallback mTaskCallback = new AsyncOperationCallback() {
 
         @Override
         public boolean performWrite(NfcWriteUtility writeUtility) throws ReadOnlyTagException, InsufficientCapacityException, TagNotPresentException, FormatException {
