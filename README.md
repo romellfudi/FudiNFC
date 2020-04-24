@@ -21,13 +21,12 @@ repositories {
 }
 dependencies {
     implementation 'com.romellfudi.fudinfc:fudi-nfc:${latestVersion}'
-
 }
 ```
 
 Add the following to your AndroidManifest.xml file :
 ```xml
-	 <uses-permission android:name="android.permission.NFC" />
+<uses-permission android:name="android.permission.NFC" />
 ```
 
 Now go to the created activity, and either
@@ -58,13 +57,12 @@ OpCallback { it.writeBluetoothAddressToTagFromIntent(text, intent) }
 
 Paste this in the activity if you're **extending our class** :
 
-
 ```kotlin
 override fun onNewIntent(Intent intent) {
-		super.onNewIntent(intent) 
-    	for (String message in getNfcMessages()) { 
-       		// message 
-    	}
+    super.onNewIntent(intent) 
+    for (String message in getNfcMessages()) { 
+        // message 
+    }
 }
 ```
 
