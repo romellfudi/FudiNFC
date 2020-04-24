@@ -4,9 +4,9 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/romellfudi/FudiNFC/blob/master/LICENSE)
 [![Bintray](https://img.shields.io/bintray/v/romllz489/maven/fudi-nfc.svg)](https://bintray.com/romllz489/maven/fudi-nfc) 
-<!-- [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Fudi%20NFC-green.svg?style=flat )]( https://android-arsenal.com/details/1/? ) -->
 [![Jitpack](https://jitpack.io/v/romellfudi/FudiNFC.svg)](https://jitpack.io/#romellfudi/FudiNFC)
 [![](https://img.shields.io/badge/language-ES-blue.svg)](./)
+<!-- [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Fudi%20NFC-green.svg?style=flat )]( https://android-arsenal.com/details/1/? ) -->
 
 ### by Romell Domínguez
 [![](snapshot/icono.png)](https://www.romellfudi.com/)
