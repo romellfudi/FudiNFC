@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020. BoostTag E.I.R.L. Romell D.Z.
+ * All rights reserved
+ * porfile.romellfudi.com
+ */
+
 package com.romellfudi.fudinfc.util.sync;
 
 import android.nfc.FormatException;
@@ -17,8 +23,6 @@ public class NfcMessageUtilityImpl implements NfcMessageUtility {
 
     private static final String TAG = NfcMessageUtilityImpl.class.getCanonicalName();
 
-
-    // Source : http://stackoverflow.com/questions/12295711/split-a-string-at-every-nth-position
     private static String[] splitStringEvery(String s, int interval) {
         int arrayLength = (int) Math.ceil(((s.length() / (double) interval)));
         String[] result = new String[arrayLength];
@@ -191,7 +195,6 @@ public class NfcMessageUtilityImpl implements NfcMessageUtility {
             return res;
         }
 
-        // Leave 1st 2 bits untouched, have to be adjusted in order to make this recognisable
         for (int i = 5; i >= 0; i--) {
             res[7 - i] = (byte) Integer.parseInt(parts[i], 16);
             System.out.println(res[5 - i]);

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020. BoostTag E.I.R.L. Romell D.Z.
+  ~ All rights reserved
+  ~ porfile.romellfudi.com
+  -->
+
 <resources>
 
-    <string name="app_name">FudiNFC</string>
+    <string name="app_name">Fudi NFC App</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="bluetooth_not_present_exception">Bluetooth is not supported by this device!</string>
