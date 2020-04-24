@@ -35,26 +35,23 @@ Now go to the created activity, and either
 * Implement [FGD] yourself
 
 ```java
-... inner activity
-		// write email
-	  OpCallback { it.writeEmailToTagFromIntent(text, null, null, intent) }
+// write email
+OpCallback { it.writeEmailToTagFromIntent(text, null, null, intent) }
 
-		// write sms
-	  OpCallback { it.writeSmsToTagFromIntent(text, null, intent) }
+// write sms
+OpCallback { it.writeSmsToTagFromIntent(text, null, intent) }
 
-		// write geolocation - latitude & longitude
-	  OpCallback { it.writeGeolocationToTagFromIntent(latitude, longitude, intent) } 
+// write geolocation - latitude & longitude
+OpCallback { it.writeGeolocationToTagFromIntent(latitude, longitude, intent) } 
 
-		// write uri
-	  OpCallback { it.writeUriToTagFromIntent(text, intent) }
+// write uri
+OpCallback { it.writeUriToTagFromIntent(text, intent) }
 
-		// write phone contact
-	  OpCallback { it.writeTelToTagFromIntent(text, intent) }
+// write phone contact
+OpCallback { it.writeTelToTagFromIntent(text, intent) }
 
-		// write rolling-on bluetooth device
-	  OpCallback { it.writeBluetoothAddressToTagFromIntent(text, intent) }
-		...
-
+// write rolling-on bluetooth device
+OpCallback { it.writeBluetoothAddressToTagFromIntent(text, intent) }
 ```
 
 ## Reading
@@ -63,34 +60,34 @@ Paste this in the activity if you're **extending our class** :
 
 
 ```kotlin
-	override fun onNewIntent(Intent intent) {
+override fun onNewIntent(Intent intent) {
 		super.onNewIntent(intent) 
-    	for (String message in getNfcMessages()) 
+    	for (String message in getNfcMessages()) { 
        		// message 
     	}
-	}
+}
 ```
 
 * Otherwise :
 
 ```kotlin
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        val items: SparseArray<String> = NfcReadUtilityImpl().readFromTagWithSparseArray(intent)
-        for (i in 0 until items.size()) {
-            // items.valueAt(i) 
-        }
+override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    val items: SparseArray<String> = NfcReadUtilityImpl().readFromTagWithSparseArray(intent)
+    for (i in 0 until items.size()) {
+        // items.valueAt(i) 
     }
+}
 ```
 * If you like the Map implementation more you might as well use :
 
 ```kotlin
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        for (message in NfcReadUtilityImpl().readFromTagWithMap(intent).values()) {
-            // message
-        }
+override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    for (message in NfcReadUtilityImpl().readFromTagWithMap(intent).values()) {
+        // message
     }
+}
 ```
 
 * Now you're able to read the NFC Tags as long as the library supports the data in it when held to your phone!
@@ -100,18 +97,18 @@ Paste this in the activity if you're **extending our class** :
 
 
 ```kotlin
-    fun onReturn(result: Boolean) {
-        val message = if (result) "Success" else "Failed!"
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
+fun onReturn(result: Boolean) {
+    val message = if (result) "Success" else "Failed!"
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
 
-    fun onProgressUpdate(vararg booleans: Boolean) {
-        Toast.makeText(this, if (booleans[0]) "We started writing" else "We could not write!", Toast.LENGTH_SHORT).show()
-    }
+fun onProgressUpdate(vararg booleans: Boolean) {
+    Toast.makeText(this, if (booleans[0]) "We started writing" else "We could not write!", Toast.LENGTH_SHORT).show()
+}
 
-    fun onError(e: Exception) {
-        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-    }
+fun onError(e: Exception) {
+    Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+}
 ```
 
 * If you hold a tag against the phone and it is NFC Enabled, your implementation of the methods will be executed.
