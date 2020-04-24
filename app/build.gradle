@@ -1,18 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'NOTICE'
-        exclude 'LICENSE.txt'
-    }
+
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.romellfudi.fudinfc.app"
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
@@ -24,17 +21,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'NOTICE'
+        exclude 'LICENSE.txt'
+    }
 }
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':fudi-nfc')
-    //implementation 'com.romellfudi:fudi-nfc:1.0.a'
+//    implementation project(':fudi-nfc')
+    implementation 'com.romellfudi.fudinfc:fudi-nfc:1.0.a'
 
-    androidTestImplementation 'com.jakewharton.espresso:espresso:1.1-r3'
-    androidTestImplementation 'com.squareup.spoon:spoon-client:1.7.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:+"
 
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'javax.annotation:jsr250-api:1.0'
+    implementation 'com.rbddevs.splashy:splashy:1.2.0'
+    def dagger_version = "2.24"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+}
+repositories {
+    mavenCentral()
 }

@@ -18,13 +18,13 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <EditText
-                android:id="@+id/input_text_email_target"
+                android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textEmailAddress" />
 
             <Button
-                android:id="@+id/btn_write_email_nfc"
+                android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="15dp"
@@ -38,13 +38,13 @@
                 android:layout_marginBottom="16dp"/>
 
             <EditText
-                android:id="@+id/input_text_sms_target"
+                android:id="@+id/smsText"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:inputType="phone" />
 
             <Button
-                android:id="@+id/btn_write_sms_nfc"
+                android:id="@+id/smsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/btn_write_sms_text" />
@@ -63,7 +63,7 @@
                 android:inputType="phone"/>
 
             <Button
-                android:id="@+id/btn_write_tel_nfc"
+                android:id="@+id/telButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/btn_write_tel_nfc_text" />
@@ -82,7 +82,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/input_text_geo_lat_target"
+                    android:id="@+id/latitudeText"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_weight=".50"
@@ -95,7 +95,7 @@
                     android:visibility="invisible" />
 
                 <EditText
-                    android:id="@+id/input_text_geo_long_target"
+                    android:id="@+id/longitudeText"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_weight=".50"
@@ -104,7 +104,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_write_geolocation_nfc"
+                android:id="@+id/geoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/btn_write_geolocation_nfc_text" />
@@ -123,7 +123,7 @@
                 android:inputType="textUri" />
 
             <Button
-                android:id="@+id/btn_write_uri_nfc"
+                android:id="@+id/uriButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/btn_write_uri_nfc_text" />
@@ -136,12 +136,12 @@
                 android:layout_marginBottom="16dp"/>
 
             <EditText
-                android:id="@+id/input_text_bluetooth_address"
+                android:id="@+id/bluetoothInput"
                 android:layout_width="match_parent"
                 android:layout_height="48dp" />
 
             <Button
-                android:id="@+id/btn_write_bluetooth_nfc"
+                android:id="@+id/bluetoothButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/btn_write_bluetooth_nfc_text" />

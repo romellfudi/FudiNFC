@@ -9,9 +9,10 @@ import android.nfc.NfcEvent;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.romellfudi.fudinfc.util.interfaces.NfcMessageUtility;
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility;

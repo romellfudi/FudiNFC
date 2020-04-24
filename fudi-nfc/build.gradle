@@ -43,10 +43,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.intellij:annotations:12.0'
 }
-
 
 task deleteJar(type: Delete) {
     delete "libs/fudi-nfc-${libraryVersion}.jar"
@@ -61,5 +60,5 @@ task createJar(type: Copy) {
 
 createJar.dependsOn(deleteJar, build)
 
-apply from: 'https://raw.githubusercontent.com/romellfudi/assets/master/artifactory_bintray.gradle'
-apply from: 'https://raw.githubusercontent.com/romellfudi/assets/master/artifactory_install.gradle'
+apply from: 'https://raw.githubusercontent.com/romellfudi/assets/bintray/artifactory_bintray.gradle'
+apply from: 'https://raw.githubusercontent.com/romellfudi/assets/bintray/artifactory_install.gradle'
