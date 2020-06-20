@@ -5,11 +5,13 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/romellfudi/FudiNFC/blob/master/LICENSE)
 [![Bintray](https://img.shields.io/bintray/v/romllz489/maven/fudi-nfc.svg)](https://bintray.com/romllz489/maven/fudi-nfc) 
 [![Jitpack](https://jitpack.io/v/romellfudi/FudiNFC.svg)](https://jitpack.io/#romellfudi/FudiNFC)
-[![](https://img.shields.io/badge/language-ES-blue.svg)](./)
-<!-- [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Fudi%20NFC-green.svg?style=flat )]( https://android-arsenal.com/details/1/? ) -->
+[![](https://img.shields.io/badge/language-ES-blue.svg)](./README.es)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Fudi%20NFC-green.svg?style=flat )]( https://android-arsenal.com/details/1/8121 )
 
 ### by Romell Domínguez
 [![](snapshot/icono.png)](https://www.romellfudi.com/)
+
+![](snapshot/banner.jpg)
 
 `latestVersion` is ![](https://img.shields.io/bintray/v/romllz489/maven/fudi-nfc.svg)
 
