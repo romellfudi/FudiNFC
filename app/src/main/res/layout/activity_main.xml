@@ -5,10 +5,11 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,18 +19,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:paddingBottom="@dimen/activity_vertical_margin">
 
-            <EditText
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:visibility="invisible"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:max="100"
+                android:backgroundTint="@color/white"
+                android:indeterminateTint="@color/colorPrimaryDark"
+                android:layout_marginTop="-7dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:inputType="textEmailAddress" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/hint_email">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_emailText"
+                    app:boxStrokeColor="@color/colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="@string/my_email" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -39,15 +66,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="#c0c0c0" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/smsText"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:inputType="phone" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/hint_sms">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_smsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="@string/my_sms" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/smsButton"
@@ -58,15 +97,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="#c0c0c0" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_text_tel_target"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:inputType="phone"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/hint_phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_input_text_tel_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="@string/my_phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/telButton"
@@ -77,9 +128,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="#c0c0c0" />
 
             <LinearLayout
                 android:id="@+id/geolocation_layout"
@@ -87,12 +138,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/latitudeText"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight=".50"
-                    android:inputType="numberDecimal" />
+                    android:hint="@string/hint_latitude">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_latitudeText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@string/my_latitude" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <View
                     android:id="@+id/centerShim"
@@ -100,12 +163,24 @@
                     android:layout_height="48dp"
                     android:visibility="invisible" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/longitudeText"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight=".50"
-                    android:inputType="numberDecimal" />
+                    android:hint="@string/hint_longitude">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_longitudeText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@string/my_longitude" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -118,15 +193,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="#c0c0c0" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_text_uri_target"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:inputType="textUri" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/hint_uri">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_input_text_uri_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:text="@string/my_uri" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/uriButton"
@@ -137,14 +224,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="#c0c0c0" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bluetoothInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="48dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/hint_mac">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_bluetoothInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@string/my_mac" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/bluetoothButton"

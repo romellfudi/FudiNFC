@@ -21,5 +21,19 @@
     <string name="progressdialog_waiting_for_tag">Waiting for tag…</string>
     <string name="progressdialog_waiting_for_tag_message">Tap tag to write…</string>
     <string name="no_input">You should give me something to write</string>
+    <string name="my_email">romllz489@gmail.com</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_sms">Enter a SMS message</string>
+    <string name="my_sms">Send data via sms</string>
+    <string name="hint_phone">Introduce your phone</string>
+    <string name="my_phone">+51952645566</string>
+    <string name="hint_latitude">Your latitude</string>
+    <string name="my_latitude">-12.0569696</string>
+    <string name="my_longitude">-77.129733</string>
+    <string name="hint_uri">Introduce an URI</string>
+    <string name="my_uri">data:text/plain;charset=utf-8;base64,ZGF0YQ==</string>
+    <string name="my_mac">03:d6:bf:a8:b3:cf</string>
+    <string name="hint_mac">Introduce Bluetooth MAC</string>
+    <string name="hint_longitude">Your longitude</string>
 
 </resources>
