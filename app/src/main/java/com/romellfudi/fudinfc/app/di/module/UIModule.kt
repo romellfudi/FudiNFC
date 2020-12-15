@@ -32,12 +32,12 @@ class UIModule {
             Splashy(mainActivity)
                     .setLogo(R.drawable.combine)
                     .setLogoScaleType(ImageView.ScaleType.FIT_CENTER)
-                    .setAnimation(Splashy.Animation.GROW_LOGO_FROM_CENTER, 500)
+                    .setAnimation(Splashy.Animation.GROW_LOGO_FROM_CENTER, 1000)
                     .setTitle(R.string.app_name)
-                    .setTitleColor(R.color.black)
                     .setSubTitle("Version  " + BuildConfig.VERSION_NAME)
-                    .setProgressColor(R.color.black)
-                    .setBackgroundResource(R.color.splash)
+                    .setTitleColor(R.color.colorAccent)
+                    .setProgressColor(R.color.colorPrimary)
+                    .setBackgroundResource(R.color.colorPrimaryDark)
                     .setTime(2000)
 
 
