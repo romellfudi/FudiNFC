@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://romellfudi.github.io/FudiNFC'
     gitUrl = 'https://github.com/romellfudi/FudiNFC.git'
 
-    libraryVersion = '1.0.a'
+    libraryVersion = '1.0.b'
 
     developerId = 'romellfudi'
     developerName = 'Romell Dominguez'
@@ -25,12 +25,12 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName libraryVersion
     }
