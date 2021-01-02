@@ -91,7 +91,7 @@ class MainActivity : NfcAct() {
 
     public override fun onNewIntent(paramIntent: Intent) {
         super.onNewIntent(paramIntent)
-        if (mOpCallback != null && mProgressDialog != null && mProgressDialog!!.isShowing) {
+        if (mOpCallback != null && mProgressDialog.isShowing) {
             WriteCallbackNfc(mTaskCallback, mOpCallback!!).executeWriteOperation()
             mOpCallback = null
         } else {
@@ -107,7 +107,8 @@ class MainActivity : NfcAct() {
 
     private fun showDialog() {
         progressbar.visibility = View.VISIBLE
-        Handler().postDelayed({ progressbar.visibility = View.INVISIBLE }, 10000)
+        Handler().postDelayed(this::dismissDialog, 10000)
+        mProgressDialog.setCancelable(false)
         mProgressDialog.setTitle(R.string.progressdialog_waiting_for_tag)
         mProgressDialog.setMessage(getString(R.string.progressdialog_waiting_for_tag_message))
         mProgressDialog.show()

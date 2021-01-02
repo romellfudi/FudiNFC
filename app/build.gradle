@@ -12,8 +12,8 @@ android {
         applicationId "com.romellfudi.fudinfc.app"
         minSdkVersion 18
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0.b"
+        versionCode 2
+        versionName "1.0.c"
     }
     buildTypes {
         release {
