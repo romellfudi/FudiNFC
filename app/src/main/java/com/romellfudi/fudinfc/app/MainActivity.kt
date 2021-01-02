@@ -7,6 +7,8 @@ package com.romellfudi.fudinfc.app
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.nfc.NfcAdapter
+import android.nfc.Tag
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -19,6 +21,7 @@ import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
 import com.romellfudi.fudinfc.util.async.WriteCallbackNfc
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
 import kotlinx.android.synthetic.main.activity_main.*
+import java.math.BigInteger
 import javax.inject.Inject
 
 class MainActivity : NfcAct() {
@@ -95,8 +98,10 @@ class MainActivity : NfcAct() {
             WriteCallbackNfc(mTaskCallback, mOpCallback!!).executeWriteOperation()
             mOpCallback = null
         } else {
+            var dataFull="my mac: ${getMAC(paramIntent)}"
             for (data in mNfcReadUtility.readFromTagWithMap(paramIntent).values)
-                Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
+                dataFull +="\n${data}"
+            Toast.makeText(this, dataFull, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -117,5 +122,15 @@ class MainActivity : NfcAct() {
     private fun dismissDialog() {
         mProgressDialog.dismiss()
         progressbar.visibility = View.INVISIBLE
+    }
+
+    private fun getMAC(intent: Intent): String{
+        val tag  = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag
+        val regex = Regex("(.{2})")
+        return regex.replace(ByteArrayToHexString(tag.id), "$1:").dropLast(1)
+    }
+
+    private fun ByteArrayToHexString(data: ByteArray): CharSequence {
+        return String.format("%0" + (data.size * 2).toString() + "X", BigInteger(1, data))
     }
 }
