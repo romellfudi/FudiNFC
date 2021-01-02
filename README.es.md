@@ -111,6 +111,15 @@ fun onError(e: Exception) {
 }
 ```
 
+# Obtain the MAC of the tap
+```kotlin
+fun getMAC(tag: Tag): String{
+    val byteArrayToHexString = String.format("%0" + (tag.id.size * 2).toString() + "X", BigInteger(1, tag.id))
+    val regex = Regex("(.{2})")
+    return regex.replace(byteArrayToHexString, "$1:").dropLast(1)
+}
+```
+
 * If you hold a tag against the phone and it is NFC Enabled, your implementation of the methods will be executed.
 
 ### License
