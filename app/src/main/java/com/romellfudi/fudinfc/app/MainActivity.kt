@@ -98,7 +98,7 @@ class MainActivity : NfcAct() {
             WriteCallbackNfc(mTaskCallback, mOpCallback!!).executeWriteOperation()
             mOpCallback = null
         } else {
-            var dataFull="my mac: ${getMAC(paramIntent)}"
+            var dataFull="my mac: ${getMAC(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag)}"
             for (data in mNfcReadUtility.readFromTagWithMap(paramIntent).values)
                 dataFull +="\n${data}"
             Toast.makeText(this, dataFull, Toast.LENGTH_SHORT).show()
@@ -124,13 +124,9 @@ class MainActivity : NfcAct() {
         progressbar.visibility = View.INVISIBLE
     }
 
-    private fun getMAC(intent: Intent): String{
-        val tag  = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag
+    private fun getMAC(tag: Tag): String{
+        val byteArrayToHexString = String.format("%0" + (tag.id.size * 2).toString() + "X", BigInteger(1, tag.id))
         val regex = Regex("(.{2})")
-        return regex.replace(ByteArrayToHexString(tag.id), "$1:").dropLast(1)
-    }
-
-    private fun ByteArrayToHexString(data: ByteArray): CharSequence {
-        return String.format("%0" + (data.size * 2).toString() + "X", BigInteger(1, data))
+        return regex.replace(byteArrayToHexString, "$1:").dropLast(1)
     }
 }
