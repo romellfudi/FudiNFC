@@ -18,7 +18,7 @@ import timber.log.Timber
  */
 val moduleNFC = module {
 
-    single { (activity: Activity) -> ProgressDialog(activity) }
+    factory { (activity: Activity) -> ProgressDialog(activity) }
 
     single<NfcReadUtility> { NfcReadUtilityImpl() }
 

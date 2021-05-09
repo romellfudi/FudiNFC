@@ -22,11 +22,12 @@ import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 import java.math.BigInteger
 
 class MainActivity : NfcAct(), KoinComponent {
 
-    private val mProgressDialog: ProgressDialog by inject()
+    private val mProgressDialog: ProgressDialog by inject { parametersOf(this@MainActivity)}
 
     private val mNfcReadUtility: NfcReadUtility by inject()
 
