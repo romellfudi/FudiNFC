@@ -127,6 +127,8 @@ fun getMAC(tag: Tag): String{
 
 * If you hold a tag against the phone and it is NFC Enabled, your implementation of the methods will be executed.
 
+<p align="center"><img src="snapshot/nfc.gif" alt="nfc"/></p>
+
 ### License
 ```
 Copyright 2020 Romell D.Z.
