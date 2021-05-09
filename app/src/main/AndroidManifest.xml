@@ -24,13 +24,12 @@
         <activity
             android:name=".view.MainActivity"
             android:screenOrientation="sensorPortrait"
-            android:label="@string/app_name"
-            >
-        </activity>
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/app_name" />
         <activity
             android:name=".view.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

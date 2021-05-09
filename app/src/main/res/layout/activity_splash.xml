@@ -17,14 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="250dp"
@@ -37,12 +37,13 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_top"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top"
+        android:foregroundGravity="bottom"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/nfc"
         app:lottie_renderMode="automatic"

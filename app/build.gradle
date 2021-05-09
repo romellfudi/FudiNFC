@@ -41,6 +41,7 @@ dependencies {
 //    implementation project(':fudi-nfc')
     implementation 'com.romellfudi.fudinfc:fudi-nfc:1.0.a'
 
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.android.support:design:29.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

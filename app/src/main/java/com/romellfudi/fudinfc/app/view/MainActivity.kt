@@ -33,6 +33,8 @@ class MainActivity : NfcAct(), KoinComponent {
 
     private val mTaskCallback: TaskCallback by inject()
 
+    private val handler: Handler by inject()
+
     var mOpCallback: OpCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,13 +102,13 @@ class MainActivity : NfcAct(), KoinComponent {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         dismissDialog()
+        super.onDestroy()
     }
 
     private fun showDialog() {
         progressbar.visibility = View.VISIBLE
-        Handler().postDelayed(this::dismissDialog, 10000)
+        handler.postDelayed(this::dismissDialog, 10000)
         mProgressDialog.setCancelable(false)
         mProgressDialog.setTitle(R.string.progressdialog_waiting_for_tag)
         mProgressDialog.setMessage(getString(R.string.progressdialog_waiting_for_tag_message))

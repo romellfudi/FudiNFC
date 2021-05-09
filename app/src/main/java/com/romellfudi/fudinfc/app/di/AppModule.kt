@@ -2,6 +2,7 @@ package com.romellfudi.fudinfc.app.di
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.os.Handler
 import android.widget.Toast
 import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
@@ -19,6 +20,7 @@ import timber.log.Timber
 val moduleNFC = module {
 
     factory { (activity: Activity) -> ProgressDialog(activity) }
+    single { Handler() }
 
     single<NfcReadUtility> { NfcReadUtilityImpl() }
 
