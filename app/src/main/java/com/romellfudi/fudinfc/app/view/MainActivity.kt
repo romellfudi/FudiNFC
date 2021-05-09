@@ -3,7 +3,7 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
-package com.romellfudi.fudinfc.app
+package com.romellfudi.fudinfc.app.view
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -13,36 +13,28 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
-import com.rbddevs.splashy.Splashy
-import com.romellfudi.fudinfc.app.di.component.DaggerNFCComponent
+import com.romellfudi.fudinfc.app.R
 import com.romellfudi.fudinfc.gear.NfcAct
 import com.romellfudi.fudinfc.gear.interfaces.OpCallback
 import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
 import com.romellfudi.fudinfc.util.async.WriteCallbackNfc
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.math.BigInteger
-import javax.inject.Inject
 
-class MainActivity : NfcAct() {
+class MainActivity : NfcAct(), KoinComponent {
 
-    @Inject
-    lateinit var mProgressDialog: ProgressDialog
+    private val mProgressDialog: ProgressDialog by inject()
 
-    @Inject
-    lateinit var splashy: Splashy
+    private val mNfcReadUtility: NfcReadUtility by inject()
 
-    @Inject
-    lateinit var mNfcReadUtility: NfcReadUtility
-
-    @Inject
-    lateinit var mTaskCallback: TaskCallback
+    private val mTaskCallback: TaskCallback by inject()
 
     var mOpCallback: OpCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerNFCComponent.factory().create(this).inject(this)
-        splashy.show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         emailButton.setOnClickListener {
@@ -98,10 +90,11 @@ class MainActivity : NfcAct() {
             WriteCallbackNfc(mTaskCallback, mOpCallback!!).executeWriteOperation()
             mOpCallback = null
         } else {
-            var dataFull="my mac: ${getMAC(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag)}"
-            for (data in mNfcReadUtility.readFromTagWithMap(paramIntent).values)
-                dataFull +="\n${data}"
-            Toast.makeText(this, dataFull, Toast.LENGTH_SHORT).show()
+            var dataFull = "my mac: " +
+                    getMAC(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag)
+            mNfcReadUtility.readFromTagWithMap(paramIntent).values
+                    .fold(dataFull) { full, st -> full + "\n${st}" }
+                    .also { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
         }
     }
 
@@ -124,7 +117,7 @@ class MainActivity : NfcAct() {
         progressbar.visibility = View.INVISIBLE
     }
 
-    private fun getMAC(tag: Tag): String{
+    private fun getMAC(tag: Tag): String {
         val byteArrayToHexString = String.format("%0" + (tag.id.size * 2).toString() + "X", BigInteger(1, tag.id))
         val regex = Regex("(.{2})")
         return regex.replace(byteArrayToHexString, "$1:").dropLast(1)

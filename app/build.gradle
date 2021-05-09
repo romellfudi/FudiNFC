@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.romellfudi.fudinfc.app"
-        minSdkVersion 18
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 2
         versionName "1.0.c"
@@ -27,6 +27,12 @@ android {
         exclude 'NOTICE'
         exclude 'LICENSE.txt'
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def flavor = variant.name
+            outputFileName = "fudiNFC-app-${flavor}.apk"
+        }
+    }
 }
 
 
@@ -39,11 +45,11 @@ dependencies {
     implementation 'com.android.support:design:29.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:+"
+    implementation 'com.airbnb.android:lottie:3.7.0'
 
-    implementation 'com.rbddevs.splashy:splashy:1.2.0'
-    def dagger_version = "2.24"
-    implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "org.koin:koin-android:2.0.0"
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 }
 repositories {
     mavenCentral()

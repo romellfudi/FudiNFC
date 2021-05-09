@@ -6,6 +6,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="splash">#f4f3f3</color>
+    <color name="white">#FFFFFF</color>
     <color name="colorAccent">#00BCD4</color>
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00796B</color>
