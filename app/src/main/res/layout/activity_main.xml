@@ -78,7 +78,7 @@
                 android:id="@+id/edit_smsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="text"
                 android:text="@string/my_sms" />
 
         </com.google.android.material.textfield.TextInputLayout>
