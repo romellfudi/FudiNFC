@@ -39,10 +39,10 @@ Add the following in your app's `build.gradle` file:
 
 ```groovy
 repositories {
-    jcenter()
+    maven { url 'https://jitpack.io' }
 }
 dependencies {
-    implementation 'com.romellfudi.fudinfc:fudi-nfc:${latestVersion}'
+    implementation 'com.github.romellfudi:FudiNFC:1.0.b'
 }
 ```
 
