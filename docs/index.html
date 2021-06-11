@@ -20,7 +20,7 @@
   </style>
 </head>
 <body class="vsc-initialized">
-  <google-codelab id="https://github.com/romellfudi/FudiNFC" environment="web" feedback-link="https://github.com/romellfudi/FudiNFC/issues" selected="" google-codelab-ready="" codelab-title="FudiNFC Library"><div id="drawer"><div class="codelab-time-container" style="display: none;"></div><div class="steps"><ol><li completed="" selected=""><a href="#0"><span class="step"><span>Introduction</span></span></a></li><li><a href="#1"><span class="step"><span>Setting up</span></span></a></li><li><a href="#2"><span class="step"><span>How to read NFC tags</span></span></a></li><li><a href="#3"><span class="step"><span>How to write into tags</span></span></a></li><li><a href="#4"><span class="step"><span>How to obtain tags' MAC</span></span></a></li><li><span class="step"><span>License</span></span></a></li></ol></div><div class="metadata"><a target="_blank" href="https://github.com/romellfudi/FudiNFC/issues"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs-preview.appspot.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="#" id="menu"><i class="material-icons">menu</i></a></div><h1 is-upgraded="" class="title">FudiNFC Library</h1><div class="codelab-time-container" style="display: none;"></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Introduction" duration="0" step="1" ><h2 is-upgraded="" class="step-title">1. Introduction</h2>
+  <google-codelab id="https://github.com/romellfudi/FudiNFC" environment="web" feedback-link="https://github.com/romellfudi/FudiNFC/issues" selected="" google-codelab-ready="" codelab-title="FudiNFC Library"><div id="drawer"><div class="codelab-time-container" style="display: none;"></div><div class="steps"><ol><li completed="" selected=""><a href="#0"><span class="step"><span>Introduction</span></span></a></li><li><a href="#1"><span class="step"><span>Setting up</span></span></a></li><li><a href="#2"><span class="step"><span>How to read NFC tags</span></span></a></li><li><a href="#3"><span class="step"><span>How to write into tags</span></span></a></li><li><a href="#4"><span class="step"><span>How to obtain tags' MAC</span></span></a></li><li><span class="step"><span>License</span></span></a></li></ol></div><div class="metadata"><a target="_blank" href="https://github.com/romellfudi/FudiNFC/issues"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs-preview.appspot.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="#" id="menu"><i class="material-icons">menu</i></a></div><h1 is-upgraded="" class="title">FudiNFC Library</h1><div class="codelab-time-container" style="display: none;"></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Introduction" duration="1" step="1" ><h2 is-upgraded="" class="step-title">1. Introduction</h2>
         <p class="image-container"><img style="width: 624.00px" src="./index_files/nfc.gif"></p>
 <h2 is-upgraded="">Target &amp; How setup</h2>
 <p>This is a tutorial for introducing how to read and write <code>Near-Field-Communication</code> tags using Android Project.  First at all, need add the dependency repository and library into your gradle files:</p>
@@ -39,7 +39,7 @@ dependencies </span><span class="pun">{</span><span class="pln">
 </aside>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="Setting up" duration="0" step="2"><h2 is-upgraded="" class="step-title">2. Setting up</h2>
+      </div></div></google-codelab-step><google-codelab-step label="Setting up" selected="0" duration="1" step="2"><h2 is-upgraded="" class="step-title">2. Setting up</h2>
         <p>To start you  need a code with interfaces classes or adapter patterns.</p>
 <h2 is-upgraded=""><strong>Download the Code</strong></h2>
 <p>Click the following link to download all the code for this tutorial:</p>
@@ -57,7 +57,7 @@ dependencies </span><span class="pun">{</span><span class="pln">
 </ul>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="How to read NFC tags" duration="0" step="3"><h2 is-upgraded="" class="step-title">3. How to read NFC tags</h2>
+      </div></div></google-codelab-step><google-codelab-step label="How to read NFC tags" duration="1" step="3"><h2 is-upgraded="" class="step-title">3. How to read NFC tags</h2>
         <h2 is-upgraded=""><strong>Add manifest's permission:</strong></h2>
 <p>  Add the following to your AndroidManifest.xml file:</p>
 <pre><code><span class="tag">&lt;uses-permission</span><span class="pln"> </span><span class="atn">android:name</span><span class="pun">=</span><span class="atv">"android.permission.NFC"</span><span class="pln"> </span><span class="tag">/&gt;</span></code></pre>
@@ -95,7 +95,7 @@ dependencies </span><span class="pun">{</span><span class="pln">
 </aside>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="How to write into tags" duration="0" step="4"><h2 is-upgraded="" class="step-title">4. How to write into tags</h2>
+      </div></div></google-codelab-step><google-codelab-step label="How to write into tags" duration="1" step="4"><h2 is-upgraded="" class="step-title">4. How to write into tags</h2>
         <h2 is-upgraded=""><strong>Implement NFC Callback interfaces:</strong></h2>
 <p>  Implement your own business-case callbacks in order to write the byte buffer:</p>
 <pre><code><span class="pln">mOpCallback </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">when</span><span class="pun">(</span><span class="pln">condition</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
@@ -132,7 +132,7 @@ dependencies </span><span class="pun">{</span><span class="pln">
 </span><span class="typ">WriteCallbackNfc</span><span class="pun">(</span><span class="pln">mTaskCallback</span><span class="pun">,</span><span class="pln"> mOpCallback</span><span class="pun">).</span><span class="pln">executeWriteOperation</span><span class="pun">()</span></code></pre>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="How to obtain tags&#39; MAC" duration="0" step="5"><h2 is-upgraded="" class="step-title">5. How to obtain tags' MAC</h2>
+      </div></div></google-codelab-step><google-codelab-step label="How to obtain tags&#39; MAC" duration="1" step="5"><h2 is-upgraded="" class="step-title">5. How to obtain tags' MAC</h2>
         <p>Use the following function as to get <code>MAC</code> of the tag</p>
 <pre><code><span class="pln">fun getMAC</span><span class="pun">(</span><span class="pln">tag</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Tag</span><span class="pun">):</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
     val byteArrayToHexString </span><span class="pun">=</span><span class="pln"> </span><span class="typ">String</span><span class="pun">.</span><span class="pln">format</span><span class="pun">(</span><span class="str">"%0"</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tag</span><span class="pun">.</span><span class="pln">id</span><span class="pun">.</span><span class="pln">size </span><span class="pun">*</span><span class="pln"> </span><span class="lit">2</span><span class="pun">).</span><span class="pln">toString</span><span class="pun">()</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">"X"</span><span class="pun">,</span><span class="pln">
@@ -145,7 +145,7 @@ dependencies </span><span class="pun">{</span><span class="pln">
 </span><span class="com">// returns 0025:96FF:FE12:3456</span></code></pre>
 
 
-      </div></div></google-codelab-step><google-codelab-step label="License" duration="0" step="6"><h2 is-upgraded="" class="step-title">6. License</h2>
+      </div></div></google-codelab-step><google-codelab-step label="License" duration="1" step="6"><h2 is-upgraded="" class="step-title">6. License</h2>
         <h2 is-upgraded=""><strong>by Romell Domínguez</strong></h2>
 <p class="image-container"><img style="width: 287.00px" src="./index_files/icono.png"></p>
 <p>Copyright 2016 Romell D.Z.</p>
