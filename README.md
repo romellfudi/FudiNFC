@@ -1,8 +1,6 @@
 <h1 align="center">
   Fudi NFC
-</h1>   
-
-![SNAPSHOT ](snapshot/banner.jpg)
+</h1>
 
 [![Platform](https://img.shields.io/badge/platform-android-brightgreen.svg?logo=android)](https://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat&logo=android)](https://android-arsenal.com/api?level=19)
@@ -16,7 +14,9 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [](#)
+![SNAPSHOT ](snapshot/banner.jpg)
+
+- [Fudi NFC](#)
   - [Author Romell Domínguez](#author-romell-domínguez)
   - [Downloads Dashboard](#downloads-dashboard)
   - [How to read tags](#how-to-read-tags)
@@ -58,7 +58,7 @@ Now go to the created activity, and either
 // write email
 OpCallback { it.writeEmailToTagFromIntent(text, null, null, intent) }
 
-// write sms
+// write sms message
 OpCallback { it.writeSmsToTagFromIntent(text, null, intent) }
 
 // write geolocation - latitude & longitude
@@ -139,7 +139,7 @@ fun getMAC(tag: Tag): String{
 }
 ```
 
-* If you hold a tag against the phone and it is NFC Enabled, your implementation of the methods will be executed.
+* If you hold a tag near by the phone and NFC is Enabled, your implementation of the methods will be executed.
 
 <p align="center"><img src="snapshot/nfc.gif" alt="nfc"/></p>
 
