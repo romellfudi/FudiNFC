@@ -142,7 +142,10 @@ fun getMAC(tag: Tag): String{
 
 * If you hold a tag near by the phone and NFC is Enabled, your implementation of the methods will be executed.
 
-<p align="center"><img src="snapshot/summary.png" alt="nfc"/></p>
+## MAD SCORE
+<p align="center"><img src="snapshot/summary.png" alt="summary"/></p>
+
+<p align="center"><img src="snapshot/kotlin.png" alt="kotlin"/></p>
 
 <p align="center"><img src="snapshot/nfc.gif" alt="nfc"/></p>
 
