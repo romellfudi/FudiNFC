@@ -42,7 +42,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    implementation 'com.github.romellfudi:FudiNFC:1.0.b'
+    implementation 'com.github.romellfudi:FudiNFC:1.1.0'
 }
 ```
 
