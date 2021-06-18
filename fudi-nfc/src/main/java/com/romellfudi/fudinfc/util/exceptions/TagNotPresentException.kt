@@ -3,20 +3,12 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.exceptions
 
-package com.romellfudi.fudinfc.util.exceptions;
-
-public class TagNotPresentException extends Exception {
-
-    public TagNotPresentException(){
-        super("Intent does not contain a tag");
-    }
-
-    public TagNotPresentException(String message){
-        super(message);
-    }
-
-    public TagNotPresentException(Exception e){
-        this.setStackTrace(e.getStackTrace());
+class TagNotPresentException : Exception {
+    constructor() : super("Intent does not contain a tag") {}
+    constructor(message: String?) : super(message) {}
+    constructor(e: Exception) {
+        stackTrace = e.stackTrace
     }
 }

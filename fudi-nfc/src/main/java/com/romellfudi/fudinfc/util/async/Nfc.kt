@@ -3,89 +3,57 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.async
 
-package com.romellfudi.fudinfc.util.async;
+import android.content.Intent
+import android.os.AsyncTask
+import com.romellfudi.fudinfc.gear.GenericTask
+import com.romellfudi.fudinfc.gear.interfaces.OpCallback
+import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
+import com.romellfudi.fudinfc.util.interfaces.NfcToOperation
+import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility
 
-import android.content.Intent;
-import android.os.AsyncTask;
+abstract class Nfc : NfcToOperation {
+    protected var nfcWriteUtility: NfcWriteUtility? = null
+    protected var asyncOperationCallback: OpCallback? = null
+    protected var asyncUiCallback: TaskCallback? = null
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import com.romellfudi.fudinfc.gear.GenericTask;
-import com.romellfudi.fudinfc.gear.interfaces.OpCallback;
-import com.romellfudi.fudinfc.gear.interfaces.TaskCallback;
-import com.romellfudi.fudinfc.util.interfaces.NfcToOperation;
-import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility;
-
-public abstract class Nfc implements NfcToOperation {
-
-    protected NfcWriteUtility mNfcWriteUtility;
-
-    protected OpCallback mOpCallback;
-    protected TaskCallback mTaskCallback;
-
-    public Nfc(final TaskCallback taskCallback) {
-        setAsyncUiCallback(taskCallback);
+    constructor(taskCallback: TaskCallback?) {
+        asyncUiCallback = taskCallback
     }
 
-    public Nfc(final TaskCallback taskCallback, NfcWriteUtility nfcWriteUtility) {
-        setAsyncUiCallback(taskCallback);
-        setNfcWriteUtility(nfcWriteUtility);
+    constructor(taskCallback: TaskCallback?, nfcWriteUtility: NfcWriteUtility?) {
+        asyncUiCallback = taskCallback
+        this.nfcWriteUtility = nfcWriteUtility
     }
 
-    public Nfc(final @Nullable TaskCallback taskCallback, final @NotNull OpCallback opCallback) {
-        this(taskCallback);
-        setAsyncOperationCallback(opCallback);
+    constructor(taskCallback: TaskCallback?, opCallback: OpCallback) : this(taskCallback) {
+        asyncOperationCallback = opCallback
     }
 
-    public Nfc(final @Nullable TaskCallback taskCallback, final @NotNull OpCallback opCallback,
-            final @NotNull NfcWriteUtility nfcWriteUtility) {
-        this(taskCallback, nfcWriteUtility);
-        setAsyncOperationCallback(opCallback);
+    constructor(
+        taskCallback: TaskCallback?, opCallback: OpCallback,
+        nfcWriteUtility: NfcWriteUtility
+    ) : this(taskCallback, nfcWriteUtility) {
+        asyncOperationCallback = opCallback
     }
 
-    protected TaskCallback getAsyncUiCallback() {
-        return mTaskCallback;
-    }
-
-    protected void setAsyncUiCallback(TaskCallback taskCallback) {
-        mTaskCallback = taskCallback;
-    }
-
-    protected OpCallback getAsyncOperationCallback() {
-        return mOpCallback;
-    }
-
-    protected void setAsyncOperationCallback(OpCallback opCallback) {
-        mOpCallback = opCallback;
-    }
-
-    protected NfcWriteUtility getNfcWriteUtility() {
-        return mNfcWriteUtility;
-    }
-
-    protected void setNfcWriteUtility(NfcWriteUtility nfcWriteUtility) {
-        mNfcWriteUtility = nfcWriteUtility;
-    }
-
-    public void executeWriteOperation() {
-        if (getNfcWriteUtility() != null) {
-            new GenericTask(mTaskCallback, getAsyncOperationCallback(), getNfcWriteUtility())
-                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    override fun executeWriteOperation() {
+        if (nfcWriteUtility != null) {
+            GenericTask(asyncUiCallback, asyncOperationCallback!!, nfcWriteUtility!!)
+                .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         } else {
-            new GenericTask(mTaskCallback, getAsyncOperationCallback())
-                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            GenericTask(asyncUiCallback, asyncOperationCallback!!)
+                .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
     }
 
-    public abstract void executeWriteOperation(Intent intent, Object... args);
-
-    protected boolean checkStringArguments(Class<?> type) {
-        return (type.equals(String[].class));
+    abstract override fun executeWriteOperation(intent: Intent?, vararg args: Any?)
+    protected fun checkStringArguments(type: Class<*>): Boolean {
+        return type == Array<String>::class.java
     }
 
-    protected boolean checkDoubleArguments(Class<?> type) {
-        return type.equals(Double[].class);
+    protected fun checkDoubleArguments(type: Class<*>): Boolean {
+        return type == Array<Double>::class.java
     }
 }

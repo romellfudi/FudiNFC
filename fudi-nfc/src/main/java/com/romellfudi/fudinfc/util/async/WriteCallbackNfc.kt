@@ -3,28 +3,20 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.async
 
-package com.romellfudi.fudinfc.util.async;
+import android.content.Intent
+import com.romellfudi.fudinfc.gear.interfaces.OpCallback
+import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
+import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility
 
-import android.content.Intent;
-
-import com.romellfudi.fudinfc.gear.interfaces.OpCallback;
-import com.romellfudi.fudinfc.gear.interfaces.TaskCallback;
-import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public class WriteCallbackNfc extends Nfc {
-
+class WriteCallbackNfc : Nfc {
     /**
      * Instantiates a new WriteCallbackNfc.
      *
      * @param taskCallback the async ui callback
      */
-    public WriteCallbackNfc(TaskCallback taskCallback) {
-        super(taskCallback);
-    }
+    constructor(taskCallback: TaskCallback?) : super(taskCallback) {}
 
     /**
      * Instantiates a new WriteCallbackNfc.
@@ -32,8 +24,10 @@ public class WriteCallbackNfc extends Nfc {
      * @param taskCallback           the async ui callback
      * @param opCallback the async operation callback
      */
-    public WriteCallbackNfc(@Nullable TaskCallback taskCallback, @NotNull OpCallback opCallback) {
-        super(taskCallback, opCallback);
+    constructor(taskCallback: TaskCallback?, opCallback: OpCallback) : super(
+        taskCallback,
+        opCallback
+    ) {
     }
 
     /**
@@ -43,12 +37,14 @@ public class WriteCallbackNfc extends Nfc {
      * @param opCallback the async operation callback
      * @param nfcWriteUtility        the nfc write utility
      */
-    public WriteCallbackNfc(@Nullable TaskCallback taskCallback, @NotNull OpCallback opCallback, @NotNull NfcWriteUtility nfcWriteUtility) {
-        super(taskCallback, opCallback, nfcWriteUtility);
+    constructor(
+        taskCallback: TaskCallback?,
+        opCallback: OpCallback,
+        nfcWriteUtility: NfcWriteUtility
+    ) : super(taskCallback, opCallback, nfcWriteUtility) {
     }
 
-    @Override
-    public void executeWriteOperation(Intent intent, Object... args) {
-        super.executeWriteOperation();
+    override fun executeWriteOperation(intent: Intent?, vararg args: Any?) {
+        super.executeWriteOperation()
     }
 }

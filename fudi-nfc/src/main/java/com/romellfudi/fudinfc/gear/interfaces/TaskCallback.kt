@@ -3,26 +3,24 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.gear.interfaces
 
-package com.romellfudi.fudinfc.gear.interfaces;
-
-public interface TaskCallback {
-
+interface TaskCallback {
     /**
      * Used to deliver the result of the operation.
      * @param result of the operation
      */
-    void onReturn(Boolean result);
+    fun onReturn(result: Boolean?)
 
     /**
      * Used to signal current state of the task.
      * @param values containing the state in values[0]
      */
-    void onProgressUpdate(Boolean... values);
+    fun onProgressUpdate(vararg values: Boolean?)
 
     /**
      * When any error occurs, the error is passed here.
      * @param e the cause of the task to stopping or malfunctioning
      */
-    void onError(Exception e);
+    fun onError(e: Exception?)
 }

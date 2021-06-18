@@ -3,47 +3,41 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.interfaces
 
-package com.romellfudi.fudinfc.util.interfaces;
+import android.content.Intent
+import android.nfc.NdefMessage
+import android.util.SparseArray
 
-import android.content.Intent;
-import android.nfc.NdefMessage;
-
-import com.romellfudi.fudinfc.util.constants.NfcHead;
-
-import java.util.Map;
-
-public interface NfcReadUtility {
-
+interface NfcReadUtility {
     /**
-     * Read data from received {@link android.content.Intent}
+     * Read data from received [android.content.Intent]
      *
      * @param nfcDataIntent
-     *         the intent containing the data to read
+     * the intent containing the data to read
      *
-     * @return the data in an array of {@link android.content.Intent}'s or an empty {@link android.util.SparseArray} array
+     * @return the data in an array of [android.content.Intent]'s or an empty [android.util.SparseArray] array
      */
-    android.util.SparseArray<String> readFromTagWithSparseArray(Intent nfcDataIntent);
+    fun readFromTagWithSparseArray(nfcDataIntent: Intent?): SparseArray<String?>?
 
     /**
-     * Read data from received {@link android.content.Intent}
+     * Read data from received [android.content.Intent]
      * @param nfcDataIntent the intent containing the data to read
-     * @return the data is either a filled or empty {@link java.util.Map} depending on whether parsing was successful
+     * @return the data is either a filled or empty [java.util.Map] depending on whether parsing was successful
      */
-    Map<Byte,String> readFromTagWithMap(Intent nfcDataIntent);
-
+    fun readFromTagWithMap(nfcDataIntent: Intent?): Map<Byte?, String?>?
 
     /**
      * Retrieve the content type from the message
-     * @param message type {@link NfcHead}
-     * @return {@link NfcHead}
+     * @param message type [NfcHead]
+     * @return [NfcHead]
      */
-    java.util.Iterator<Byte> retrieveMessageTypes(NdefMessage message);
+    fun retrieveMessageTypes(message: NdefMessage?): Iterator<Byte?>?
 
     /**
      * Retrieve the actual message content
      * @param message to parse
      * @return the formatted message
      */
-    String retrieveMessage(NdefMessage message);
+    fun retrieveMessage(message: NdefMessage?): String?
 }

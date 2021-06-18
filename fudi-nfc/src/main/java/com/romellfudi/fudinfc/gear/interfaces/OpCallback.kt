@@ -3,22 +3,24 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.gear.interfaces
 
-package com.romellfudi.fudinfc.gear.interfaces;
+import android.nfc.FormatException
+import com.romellfudi.fudinfc.util.exceptions.InsufficientCapacityException
+import com.romellfudi.fudinfc.util.exceptions.ReadOnlyTagException
+import com.romellfudi.fudinfc.util.exceptions.TagNotPresentException
+import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility
 
-import android.nfc.FormatException;
-
-import com.romellfudi.fudinfc.util.exceptions.InsufficientCapacityException;
-import com.romellfudi.fudinfc.util.exceptions.ReadOnlyTagException;
-import com.romellfudi.fudinfc.util.exceptions.TagNotPresentException;
-import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility;
-
-public interface OpCallback {
-
+interface OpCallback {
     /**
      * Executed on background thread, do NOT perform any UI logic here !
      * @return
      */
-
-    boolean performWrite(NfcWriteUtility writeUtility) throws ReadOnlyTagException, InsufficientCapacityException, TagNotPresentException, FormatException;
+    @Throws(
+        ReadOnlyTagException::class,
+        InsufficientCapacityException::class,
+        TagNotPresentException::class,
+        FormatException::class
+    )
+    fun performWrite(writeUtility: NfcWriteUtility?): Boolean
 }

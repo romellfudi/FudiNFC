@@ -3,17 +3,9 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.exceptions
 
-package com.romellfudi.fudinfc.util.exceptions;
-
-public class ReadOnlyTagException extends TagNotWritableException {
-
-    public ReadOnlyTagException() {
-    }
-
-    public ReadOnlyTagException(String message) {
-        super(message);
-    }
-
-
+class ReadOnlyTagException : TagNotWritableException {
+    constructor() {}
+    constructor(message: String?) : super(message) {}
 }

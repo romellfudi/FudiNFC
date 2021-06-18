@@ -3,31 +3,24 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.async
 
-package com.romellfudi.fudinfc.util.async;
+import android.content.Intent
+import android.nfc.FormatException
+import com.romellfudi.fudinfc.gear.interfaces.OpCallback
+import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
+import com.romellfudi.fudinfc.util.exceptions.InsufficientCapacityException
+import com.romellfudi.fudinfc.util.exceptions.ReadOnlyTagException
+import com.romellfudi.fudinfc.util.exceptions.TagNotPresentException
+import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility
 
-import android.content.Intent;
-import android.nfc.FormatException;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import com.romellfudi.fudinfc.util.exceptions.InsufficientCapacityException;
-import com.romellfudi.fudinfc.util.exceptions.ReadOnlyTagException;
-import com.romellfudi.fudinfc.util.exceptions.TagNotPresentException;
-import com.romellfudi.fudinfc.gear.interfaces.OpCallback;
-import com.romellfudi.fudinfc.gear.interfaces.TaskCallback;
-import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility;
-
-public class WritePhoneNfc extends Nfc {
+class WritePhoneNfc : Nfc {
     /**
      * Instantiates a new WritePhoneNfc.
      *
      * @param taskCallback the async ui callback
      */
-    public WritePhoneNfc(TaskCallback taskCallback) {
-        super(taskCallback);
-    }
+    constructor(taskCallback: TaskCallback?) : super(taskCallback) {}
 
     /**
      * Instantiates a new WritePhoneNfc.
@@ -35,8 +28,10 @@ public class WritePhoneNfc extends Nfc {
      * @param taskCallback the async ui callback
      * @param opCallback the async operation callback
      */
-    public WritePhoneNfc(@Nullable TaskCallback taskCallback, @NotNull OpCallback opCallback) {
-        super(taskCallback, opCallback);
+    constructor(taskCallback: TaskCallback?, opCallback: OpCallback) : super(
+        taskCallback,
+        opCallback
+    ) {
     }
 
     /**
@@ -46,22 +41,28 @@ public class WritePhoneNfc extends Nfc {
      * @param opCallback the async operation callback
      * @param nfcWriteUtility the nfc write utility
      */
-    public WritePhoneNfc(@Nullable TaskCallback taskCallback, @NotNull OpCallback opCallback, @NotNull NfcWriteUtility nfcWriteUtility) {
-        super(taskCallback, opCallback, nfcWriteUtility);
+    constructor(
+        taskCallback: TaskCallback?,
+        opCallback: OpCallback,
+        nfcWriteUtility: NfcWriteUtility
+    ) : super(taskCallback, opCallback, nfcWriteUtility) {
     }
 
-    @Override
-    public void executeWriteOperation(final Intent intent, final Object... args) {
-        if (checkStringArguments(args.getClass()) || args.length != 1 || intent == null) {
-            throw new UnsupportedOperationException("Invalid arguments");
+    override fun executeWriteOperation(intent: Intent?, vararg args: Any?) {
+        if (checkStringArguments(args.javaClass) || args.size != 1 || intent == null) {
+            throw UnsupportedOperationException("Invalid arguments")
         }
-
-        setAsyncOperationCallback(new OpCallback() {
-            @Override
-            public boolean performWrite(NfcWriteUtility writeUtility) throws ReadOnlyTagException, InsufficientCapacityException, TagNotPresentException, FormatException {
-                return writeUtility.writeTelToTagFromIntent((String) args[0], intent);
+        asyncOperationCallback = object : OpCallback {
+            @Throws(
+                ReadOnlyTagException::class,
+                InsufficientCapacityException::class,
+                TagNotPresentException::class,
+                FormatException::class
+            )
+            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
+                return writeUtility!!.writeTelToTagFromIntent((args[0] as String), intent)
             }
-        });
-        super.executeWriteOperation();
+        }
+        super.executeWriteOperation()
     }
 }

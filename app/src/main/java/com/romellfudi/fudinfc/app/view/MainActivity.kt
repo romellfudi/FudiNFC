@@ -19,6 +19,7 @@ import com.romellfudi.fudinfc.gear.interfaces.OpCallback
 import com.romellfudi.fudinfc.gear.interfaces.TaskCallback
 import com.romellfudi.fudinfc.util.async.WriteCallbackNfc
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
+import com.romellfudi.fudinfc.util.interfaces.NfcWriteUtility
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -27,7 +28,7 @@ import java.math.BigInteger
 
 class MainActivity : NfcAct(), KoinComponent {
 
-    private val mProgressDialog: ProgressDialog by inject { parametersOf(this@MainActivity)}
+    private val mProgressDialog: ProgressDialog by inject { parametersOf(this@MainActivity) }
 
     private val mNfcReadUtility: NfcReadUtility by inject()
 
@@ -43,14 +44,22 @@ class MainActivity : NfcAct(), KoinComponent {
         emailButton.setOnClickListener {
             if (emailText != null) {
                 val text = edit_emailText.text.toString()
-                mOpCallback = OpCallback { it.writeEmailToTagFromIntent(text, null, null, intent) }
+                mOpCallback = object : OpCallback {
+                    override fun performWrite(it: NfcWriteUtility?): Boolean {
+                        return it!!.writeEmailToTagFromIntent(text, null, null, intent)
+                    }
+                }
                 showDialog()
             }
         }
         smsButton.setOnClickListener {
             if (smsText != null) {
                 val text = edit_smsText.text.toString()
-                mOpCallback = OpCallback { it.writeSmsToTagFromIntent(text, null, intent) }
+                mOpCallback = object : OpCallback {
+                    override fun performWrite(it: NfcWriteUtility?): Boolean {
+                        return it!!.writeSmsToTagFromIntent(text, null, intent)
+                    }
+                }
                 showDialog()
             }
         }
@@ -58,23 +67,39 @@ class MainActivity : NfcAct(), KoinComponent {
             if (latitudeText != null && longitudeText != null) {
                 val longitude = edit_latitudeText.text.toString().toDouble()
                 val latitude = edit_longitudeText.text.toString().toDouble()
-                mOpCallback = OpCallback { it.writeGeolocationToTagFromIntent(latitude, longitude, intent) }
+                mOpCallback = object : OpCallback {
+                    override fun performWrite(it: NfcWriteUtility?): Boolean {
+                        return it!!.writeGeolocationToTagFromIntent(latitude, longitude, intent)
+                    }
+                }
                 showDialog()
             }
         }
         uriButton?.setOnClickListener {
             val uriText = edit_input_text_uri_target.text.toString()
-            mOpCallback = OpCallback { it.writeUriToTagFromIntent(uriText, intent) }
+            mOpCallback = object : OpCallback {
+                override fun performWrite(it: NfcWriteUtility?): Boolean {
+                    return it!!.writeUriToTagFromIntent(uriText, intent)
+                }
+            }
             showDialog()
         }
         telButton.setOnClickListener {
             val telText = edit_input_text_tel_target.text.toString()
-            mOpCallback = OpCallback { it.writeTelToTagFromIntent(telText, intent) }
+            mOpCallback = object : OpCallback {
+                override fun performWrite(it: NfcWriteUtility?): Boolean {
+                    return it!!.writeTelToTagFromIntent(telText, intent)
+                }
+            }
             showDialog()
         }
         bluetoothButton.setOnClickListener {
             val text = edit_bluetoothInput.text.toString()
-            mOpCallback = OpCallback { it.writeBluetoothAddressToTagFromIntent(text, intent) }
+            mOpCallback = object : OpCallback {
+                override fun performWrite(it: NfcWriteUtility?): Boolean {
+                    return it!!.writeBluetoothAddressToTagFromIntent(text, intent)
+                }
+            }
             showDialog()
         }
         enableBeam()
@@ -82,9 +107,7 @@ class MainActivity : NfcAct(), KoinComponent {
 
     override fun onPause() {
         super.onPause()
-        if (nfcAdapter != null) {
-            nfcAdapter.disableForegroundDispatch(this)
-        }
+        nfcAdapter?.disableForegroundDispatch(this)
     }
 
     public override fun onNewIntent(paramIntent: Intent) {
@@ -95,9 +118,9 @@ class MainActivity : NfcAct(), KoinComponent {
         } else {
             var dataFull = "my mac: " +
                     getMAC(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag)
-            mNfcReadUtility.readFromTagWithMap(paramIntent).values
-                    .fold(dataFull) { full, st -> full + "\n${st}" }
-                    .also { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+            mNfcReadUtility.readFromTagWithMap(paramIntent)!!.values
+                .fold(dataFull) { full, st -> full + "\n${st}" }
+                .also { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
         }
     }
 
@@ -120,9 +143,8 @@ class MainActivity : NfcAct(), KoinComponent {
         progressbar.visibility = View.INVISIBLE
     }
 
-    private fun getMAC(tag: Tag): String {
-        val byteArrayToHexString = String.format("%0" + (tag.id.size * 2).toString() + "X", BigInteger(1, tag.id))
-        val regex = Regex("(.{2})")
-        return regex.replace(byteArrayToHexString, "$1:").dropLast(1)
-    }
+    private fun getMAC(tag: Tag): String =
+        Regex("(.{2})").replace(
+            String.format("%0" + (tag.id.size * 2).toString() + "X",
+                BigInteger(1, tag.id)),"$1:").dropLast(1)
 }

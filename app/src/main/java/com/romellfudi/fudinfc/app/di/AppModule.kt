@@ -26,10 +26,10 @@ val moduleNFC = module {
 
     fun provideTaskCallback(mainActivity: Activity, mProgressDialog: ProgressDialog) =
             object : TaskCallback {
-                override fun onReturn(result: Boolean) {
+                override fun onReturn(result: Boolean?) {
                     Timber.d("Received our result : $result")
                     if (mProgressDialog.isShowing) mProgressDialog.dismiss()
-                    if (result) Toast.makeText(mainActivity, "Write has been done!", Toast.LENGTH_SHORT).show()
+                    if (result!!) Toast.makeText(mainActivity, "Write has been done!", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onProgressUpdate(vararg values: Boolean?) {
@@ -40,11 +40,11 @@ val moduleNFC = module {
                     }
                 }
 
-                override fun onError(e: Exception) {
+                override fun onError(e: Exception?) {
                     Timber.e("Encountered an error!!")
                     if (mProgressDialog.isShowing)
                         mProgressDialog.dismiss()
-                    Toast.makeText(mainActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mainActivity, e?.message?: "no message", Toast.LENGTH_SHORT).show()
                 }
             }
 

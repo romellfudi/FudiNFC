@@ -3,10 +3,8 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.constants
 
-package com.romellfudi.fudinfc.util.constants;
-
-public class NfcType {
-
-    public static final byte[] BLUETOOTH_AAR = "application/vnd.bluetooth.ep.oob".getBytes();
+object NfcType {
+    val BLUETOOTH_AAR = "application/vnd.bluetooth.ep.oob".toByteArray()
 }

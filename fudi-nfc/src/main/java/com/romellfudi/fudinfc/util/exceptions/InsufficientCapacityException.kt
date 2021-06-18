@@ -3,19 +3,12 @@
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.exceptions
 
-package com.romellfudi.fudinfc.util.exceptions;
-
-public class InsufficientCapacityException extends Exception {
-
-    public InsufficientCapacityException() {
-    }
-
-    public InsufficientCapacityException(String message) {
-        super(message);
-    }
-
-    public InsufficientCapacityException(StackTraceElement[] stackTraceElements) {
-        setStackTrace(stackTraceElements);
+class InsufficientCapacityException : Exception {
+    constructor() {}
+    constructor(message: String?) : super(message) {}
+    constructor(stackTraceElements: Array<StackTraceElement?>?) {
+        stackTrace = stackTraceElements
     }
 }

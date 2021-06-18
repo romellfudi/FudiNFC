@@ -1,158 +1,185 @@
-
 /*
  * Copyright (c) 2020. BoostTag E.I.R.L. Romell D.Z.
  * All rights reserved
  * porfile.romellfudi.com
  */
+package com.romellfudi.fudinfc.util.constants
 
-package com.romellfudi.fudinfc.util.constants;
+object NfcHead {
+    const val CUSTOM_SCHEME: Byte = 0x00
 
-public class NfcHead {
-
-    public static final byte CUSTOM_SCHEME = 0x00;
     /**
      * This URI is in the format of http://www.
      */
-    public static final byte HTTP_WWW = 0x01;
+    const val HTTP_WWW: Byte = 0x01
+
     /**
      * This URI is in the format of https://www.
      */
-    public static final byte HTTPS_WWW = 0x02;
+    const val HTTPS_WWW: Byte = 0x02
+
     /**
      * This URI is in the format of http://.
      */
-    public static final byte HTTP = 0x03;
+    const val HTTP: Byte = 0x03
+
     /**
      * This URI is in the format of https://.
      */
-    public static final byte HTTPS = 0x04;
+    const val HTTPS: Byte = 0x04
+
     /**
      * This URI is in the format of tel:
      */
-    public static final byte TEL = 0x05;
+    const val TEL: Byte = 0x05
+
     /**
      * This URI is in the format of mailto:.
      */
-    public static final byte MAILTO = 0x06;
+    const val MAILTO: Byte = 0x06
+
     /**
      * This URI is in the format of ftp://anonymous:anonymous@
      */
-    public static final byte FTP_ANONYMOUS = 0x07;
+    const val FTP_ANONYMOUS: Byte = 0x07
+
     /**
      * This URI is in the format of ftp://ftp.
      */
-    public static final byte FTP_URI = 0x08;
+    const val FTP_URI: Byte = 0x08
+
     /**
      * This URI is in the format of ftps://
      */
-    public static final byte FTPS = 0x09;
+    const val FTPS: Byte = 0x09
+
     /**
      * This URI is in the format of sftp://
      */
-    public static final byte SFTP = 0x0A;
+    const val SFTP: Byte = 0x0A
+
     /**
      * This URI is in the format of smb://
      */
-    public static final byte SMB = 0x0B;
+    const val SMB: Byte = 0x0B
+
     /**
      * This URI is in the format of nfs://
      */
-    public static final byte NFS = 0x0C;
+    const val NFS: Byte = 0x0C
+
     /**
      * This URI is in the format of ftp://
      */
-    public static final byte FTP = 0x0D;
+    const val FTP: Byte = 0x0D
+
     /**
      * This URI is in the format of dav://
      */
-    public static final byte DAV = 0x0E;
+    const val DAV: Byte = 0x0E
+
     /**
      * This URI is in the format of news://
      */
-    public static final byte NEWS = 0x0F;
+    const val NEWS: Byte = 0x0F
+
     /**
      * This URI is in the format of telnet://
      */
-    public static final byte TELNET = 0x10;
+    const val TELNET: Byte = 0x10
+
     /**
      * This URI is in the format of imap:
      */
-    public static final byte IMAP = 0x11;
+    const val IMAP: Byte = 0x11
+
     /**
      * This URI is in the format of rtsp://.
      */
-    public static final byte RTSP = 0x12;
+    const val RTSP: Byte = 0x12
+
     /**
      * This URI is in the format of urn:
      */
-    public static final byte URN = 0x13;
+    const val URN: Byte = 0x13
+
     /**
      * This URI is in the format of pop:
      */
-    public static final byte POP = 0x14;
+    const val POP: Byte = 0x14
+
     /**
      * This URI is in the format of sip:
      */
-    public static final byte SIP = 0x15;
+    const val SIP: Byte = 0x15
+
     /**
      * This URI is in the format of sips:
      */
-    public static final byte SIPS = 0x16;
+    const val SIPS: Byte = 0x16
+
     /**
      * This URI is in the format of tftp:
      */
-    public static final byte TFTP = 0x17;
+    const val TFTP: Byte = 0x17
+
     /**
      * This URI is in the format of btspp://
      */
-    public static final byte BT_SPP = 0x18;
+    const val BT_SPP: Byte = 0x18
+
     /**
      * This URI is in the format of bt12cap://.
      */
-    public static final byte BT_12CAP = 0x19;
+    const val BT_12CAP: Byte = 0x19
+
     /**
      * This URI is in the format of btgoep://.
      */
-    public static final byte BT_GOEP = 0x1A;
+    const val BT_GOEP: Byte = 0x1A
+
     /**
      * This URI is in the format of tcpobex://
      */
-    public static final byte TCP_OBEX = 0x1B;
+    const val TCP_OBEX: Byte = 0x1B
+
     /**
      * This URI is in the format of irdaobex://
      */
-    public static final byte IRDA_OBEX = 0x1C;
+    const val IRDA_OBEX: Byte = 0x1C
+
     /**
      * This URI is in the format of file://
      */
-    public static final byte FILE = 0x1D;
+    const val FILE: Byte = 0x1D
+
     /**
      * This URI is in the format of urn:epc:id:
      */
-    public static final byte URN_EPC_ID = 0x1E;
+    const val URN_EPC_ID: Byte = 0x1E
+
     /**
      * This URI is in the format of urn:epc:tag:
      */
-    public static final byte URN_EPC_TAG = 0x1F;
+    const val URN_EPC_TAG: Byte = 0x1F
 
     /**
      * This URI is in the format of urn:epc:pat:
      */
-    public static final byte URN_EPC_PAT = 0x20;
+    const val URN_EPC_PAT: Byte = 0x20
 
     /**
      * This URI is in the format of urn:epc:raw:
      */
-    public static final byte URN_EPC_RAW = 0x21;
+    const val URN_EPC_RAW: Byte = 0x21
 
     /**
      * This URI is in the format of urn:epc:
      */
-    public static final byte URN_EPC = 0x22;
+    const val URN_EPC: Byte = 0x22
 
     /**
      * This URI is in the format of urn:nfc:
      */
-    public static final byte URN_NFC = 0x23;
-
+    const val URN_NFC: Byte = 0x23
 }
