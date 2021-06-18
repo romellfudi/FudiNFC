@@ -144,9 +144,7 @@ fun getMAC(tag: Tag): String{
 
 ## MAD SCORE
 <p align="center"><img src="snapshot/summary.png" alt="summary"/></p>
-
 <p align="center"><img src="snapshot/kotlin.png" alt="kotlin"/></p>
-
 <p align="center"><img src="snapshot/nfc.gif" alt="nfc"/></p>
 
 ## License
