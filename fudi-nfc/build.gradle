@@ -13,7 +13,7 @@ ext {
     libraryDescription = 'NFC Reader And Writer using Android devices'
 
     siteUrl = 'https://romellfudi.github.io/FudiNFC'
-    gitUrl = 'https://github.com:zigapovhe/FudiNFC.git'
+    gitUrl = 'https://github.com/romellfudi/FudiNFC.git'
 
     libraryVersion = '1.2.0'
 
