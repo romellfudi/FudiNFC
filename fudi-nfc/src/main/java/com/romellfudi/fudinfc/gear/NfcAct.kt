@@ -92,7 +92,7 @@ abstract class NfcAct : AppCompatActivity(), CreateNdefMessageCallback {
             this,
             0,
             Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-            0
+            PendingIntent.FLAG_MUTABLE
         )
         mIntentFilters = arrayOf(IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED))
         mTechLists = arrayOf(
