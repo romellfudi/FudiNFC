@@ -46,7 +46,7 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
 //    implementation 'com.intellij:annotations:12.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
