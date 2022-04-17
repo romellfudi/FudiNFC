@@ -83,11 +83,10 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         InsufficientCapacityException::class,
         TagNotPresentException::class
     )
-    override fun writeUriToTagFromIntent(urlAddress: String, intent: Intent): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createUri(urlAddress)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+    override fun writeUriToTagFromIntent(urlAddress: String, intent: Intent) =
+        mNfcMessageUtility?.run {
+            writeToTag(createUri(urlAddress), retrieveTagFromIntent(intent))
+        } ?: false
 
     /**
      * {@inheritDoc}
@@ -102,11 +101,9 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         urlAddress: String,
         payloadHeader: Byte,
         intent: Intent
-    ): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createUri(urlAddress, payloadHeader)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+    ) = mNfcMessageUtility?.run {
+        writeToTag(createUri(urlAddress, payloadHeader), retrieveTagFromIntent(intent))
+    } ?: false
 
     /**
      * {@inheritDoc}
@@ -117,11 +114,10 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         InsufficientCapacityException::class,
         TagNotPresentException::class
     )
-    override fun writeTelToTagFromIntent(telephone: String, intent: Intent): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createTel(telephone)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+    override fun writeTelToTagFromIntent(telephone: String, intent: Intent) =
+        mNfcMessageUtility?.run {
+            writeToTag(createTel(telephone), retrieveTagFromIntent(intent))
+        } ?: false
 
     /**
      * {@inheritDoc}
@@ -132,15 +128,10 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         InsufficientCapacityException::class,
         TagNotPresentException::class
     )
-    override fun writeSmsToTagFromIntent(
-        number: String,
-        message: String?,
-        intent: Intent
-    ): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createSms(number, message)
-        val tag = retrieveTagFromIntent(intent)
-        return mWriteUtility!!.writeToTag(ndefMessage, tag)
-    }
+    override fun writeSmsToTagFromIntent(number: String, message: String?, intent: Intent) =
+        mNfcMessageUtility?.run {
+            writeToTag(createSms(number, message), retrieveTagFromIntent(intent))
+        } ?: false
 
     /**
      * {@inheritDoc}
@@ -155,11 +146,9 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         latitude: Double?,
         longitude: Double?,
         intent: Intent
-    ): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createGeolocation(latitude, longitude)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+    ) = mNfcMessageUtility?.run {
+        writeToTag(createGeolocation(latitude, longitude), retrieveTagFromIntent(intent))
+    } ?: false
 
     /**
      * {@inheritDoc}
@@ -171,15 +160,10 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         TagNotPresentException::class
     )
     override fun writeEmailToTagFromIntent(
-        recipient: String,
-        subject: String?,
-        message: String?,
-        intent: Intent
-    ): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createEmail(recipient, subject, message)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+        recipient: String, subject: String?, message: String?, intent: Intent
+    ) = mNfcMessageUtility?.run {
+        writeToTag(createEmail(recipient, subject, message), retrieveTagFromIntent(intent))
+    } ?: false
 
     /**
      * {@inheritDoc}
@@ -193,11 +177,11 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
     override fun writeBluetoothAddressToTagFromIntent(
         macAddress: String,
         intent: Intent?
-    ): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createBluetoothAddress(macAddress)
+    ) = mNfcMessageUtility?.run {
+        val ndefMessage = createBluetoothAddress(macAddress)
         val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+        writeToTag(ndefMessage, tag)
+    } ?: false
 
     @Throws(
         FormatException::class,
@@ -205,10 +189,8 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         ReadOnlyTagException::class,
         InsufficientCapacityException::class
     )
-    override fun writeNdefMessageToTagFromIntent(message: NdefMessage, intent: Intent?): Boolean {
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(message, tag)
-    }
+    override fun writeNdefMessageToTagFromIntent(message: NdefMessage, intent: Intent?) =
+        writeToTag(message, retrieveTagFromIntent(intent))
 
     @Throws(
         FormatException::class,
@@ -216,11 +198,10 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         ReadOnlyTagException::class,
         InsufficientCapacityException::class
     )
-    override fun writeTextToTagFromIntent(message: String, intent: Intent?): Boolean {
-        val ndefMessage = mNfcMessageUtility!!.createText(message)
-        val tag = retrieveTagFromIntent(intent)
-        return writeToTag(ndefMessage, tag)
-    }
+    override fun writeTextToTagFromIntent(message: String, intent: Intent?) =
+        mNfcMessageUtility?.run {
+            writeToTag(createText(message), retrieveTagFromIntent(intent))
+        } ?: false
 
     /**
      * {@inheritDoc}
@@ -235,14 +216,15 @@ class NfcWriteUtilityImpl : NfcWriteUtility {
         ReadOnlyTagException::class,
         InsufficientCapacityException::class
     )
-    private fun writeToTag(ndefMessage: NdefMessage?, tag: Tag): Boolean {
-        return if (mReadOnly) mWriteUtility!!.makeOperationReadOnly()!!
-            .writeToTag(ndefMessage, tag) else mWriteUtility!!.writeToTag(ndefMessage, tag)
-    }
+    private fun writeToTag(ndefMessage: NdefMessage?, tag: Tag) = mWriteUtility?.run {
+        if (mReadOnly) makeOperationReadOnly()
+            ?.writeToTag(ndefMessage, tag)
+        else writeToTag(ndefMessage, tag)
+    } ?: false
 
     @Throws(TagNotPresentException::class)
     private fun retrieveTagFromIntent(i: Intent?): Tag {
-        return i!!.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        return i?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
             ?: throw TagNotPresentException()
     }
 }

@@ -59,13 +59,9 @@ class WriteGeoLocationNfc : Nfc {
                 TagNotPresentException::class,
                 FormatException::class
             )
-            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
-                return writeUtility!!.writeGeolocationToTagFromIntent(
-                    args[0] as Double,
-                    args[1] as Double,
-                    intent
-                )
-            }
+            override fun performWrite(writeUtility: NfcWriteUtility?) = (writeUtility?.apply {
+                    writeGeolocationToTagFromIntent(args[0] as Double, args[1] as Double, intent)
+                } ?: false) as Boolean
         }
         super.executeWriteOperation()
     }

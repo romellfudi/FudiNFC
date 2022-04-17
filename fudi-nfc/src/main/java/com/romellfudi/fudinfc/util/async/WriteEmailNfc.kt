@@ -56,7 +56,7 @@ class WriteEmailNfc : Nfc {
     }
 
     override fun executeWriteOperation(intent: Intent?, vararg args: Any?) {
-        if (!checkStringArguments(args.javaClass) || args.size == 0) {
+        if (!checkStringArguments(args.javaClass) || args.isEmpty() || intent == null) {
             throw UnsupportedOperationException("Incorrect arguments")
         }
         val recipient = args[0] as String
@@ -69,14 +69,9 @@ class WriteEmailNfc : Nfc {
                 TagNotPresentException::class,
                 FormatException::class
             )
-            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
-                return writeUtility!!.writeEmailToTagFromIntent(
-                    recipient,
-                    subject,
-                    message,
-                    intent!!
-                )
-            }
+            override fun performWrite(writeUtility: NfcWriteUtility?) = (writeUtility?.apply {
+                writeEmailToTagFromIntent(recipient, subject, message, intent)
+            } ?: false) as Boolean
         }
         super.executeWriteOperation()
     }

@@ -48,7 +48,7 @@ class WriteUtilityImpl : WriteUtility {
         FormatException::class
     )
     override fun writeToNdef(message: NdefMessage?, ndef: Ndef?): Boolean {
-        return mNdefWrite!!.writeToNdef(message, ndef)
+        return mNdefWrite?.writeToNdef(message, ndef) == true
     }
 
     @Throws(
@@ -57,7 +57,7 @@ class WriteUtilityImpl : WriteUtility {
         FormatException::class
     )
     override fun writeToNdefAndMakeReadonly(message: NdefMessage?, ndef: Ndef?): Boolean {
-        return mNdefWrite!!.writeToNdefAndMakeReadonly(message, ndef)
+        return mNdefWrite?.writeToNdefAndMakeReadonly(message, ndef) == true
     }
 
     @Throws(FormatException::class)
@@ -65,7 +65,7 @@ class WriteUtilityImpl : WriteUtility {
         message: NdefMessage?,
         ndefFormatable: NdefFormatable?
     ): Boolean {
-        return mNdefWrite!!.writeToNdefFormatable(message, ndefFormatable)
+        return mNdefWrite?.writeToNdefFormatable(message, ndefFormatable) == true
     }
 
     @Throws(FormatException::class)
@@ -73,7 +73,7 @@ class WriteUtilityImpl : WriteUtility {
         message: NdefMessage?,
         ndefFormat: NdefFormatable?
     ): Boolean {
-        return mNdefWrite!!.writeToNdefFormatableAndMakeReadonly(message, ndefFormat)
+        return mNdefWrite?.writeToNdefFormatableAndMakeReadonly(message, ndefFormat) == true
     }
 
     override fun writeSafelyToTag(message: NdefMessage?, tag: Tag?): Boolean {
@@ -97,12 +97,9 @@ class WriteUtilityImpl : WriteUtility {
     override fun writeToTag(message: NdefMessage?, tag: Tag?): Boolean {
         val ndef = Ndef.get(tag)
         val formatable = NdefFormatable.get(tag)
-        val result: Boolean
-        result = if (readOnly) {
-            writeToNdefAndMakeReadonly(message, ndef) || writeToNdefFormatableAndMakeReadonly(
-                message,
-                formatable
-            )
+        val result: Boolean = if (readOnly) {
+            writeToNdefAndMakeReadonly(message, ndef) ||
+                    writeToNdefFormatableAndMakeReadonly(message, formatable)
         } else {
             writeToNdef(message, ndef) || writeToNdefFormatable(message, formatable)
         }

@@ -58,28 +58,24 @@ class GenericTask : AsyncTask<Void?, Boolean?, Boolean> {
      * @param params
      * @return OpCallback.performWrite() == true
      */
-    protected override fun doInBackground(vararg params: Void?): Boolean {
-        Log.d(TAG, "Writing ..")
+    override fun doInBackground(vararg params: Void?): Boolean {
         var res = false
         try {
+            Log.d(TAG, "Writing ..")
             publishProgress(true)
-            if (mOpCallback != null) {
-                res = mOpCallback!!.performWrite(mNfcWriteUtility)
-            } else {
+            mOpCallback?.let {
+                res = it.performWrite(mNfcWriteUtility)
+            } ?: run {
                 error = NullPointerException("OperationCallback is null")
             }
         } catch (e: Exception) {
             Log.w(TAG, e)
-            mTaskCallback!!.onError(e)
+            mTaskCallback?.onError(e)
             error = e
         }
 
         // Remove tag from intent in order to prevent writing to a not present tag
         return res
-    }
-
-    override fun onPreExecute() {
-        super.onPreExecute()
     }
 
     /**
@@ -89,19 +85,15 @@ class GenericTask : AsyncTask<Void?, Boolean?, Boolean> {
      */
     override fun onPostExecute(result: Boolean) {
         super.onPostExecute(result)
-        if (mOpCallback != null && mTaskCallback != null) {
-            if (error != null) {
-                mTaskCallback!!.onError(error)
-            }
-            mTaskCallback!!.onReturn(result)
+        mOpCallback?.run {
+            error?.let { mTaskCallback?.onError(it) }
+            mTaskCallback?.onReturn(result)
         }
     }
 
-    protected override fun onProgressUpdate(vararg values: Boolean?) {
+    override fun onProgressUpdate(vararg values: Boolean?) {
         super.onProgressUpdate(*values)
-        if (mTaskCallback != null) {
-            mTaskCallback!!.onProgressUpdate(*values)
-        }
+        mTaskCallback?.onProgressUpdate(*values)
     }
 
     companion object {

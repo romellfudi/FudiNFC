@@ -43,6 +43,8 @@ repositories {
 }
 dependencies {
     implementation 'com.github.romellfudi:FudiNFC:1.1.0'
+    // support for Android Nougat (API 31)
+    implementation 'com.github.romellfudi:FudiNFC:android-12-1.1.0'
 }
 ```
 

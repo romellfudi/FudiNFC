@@ -33,6 +33,10 @@ android {
             outputFileName = "fudiNFC-app-${flavor}.apk"
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -45,7 +49,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation 'com.airbnb.android:lottie:3.7.0'
 
     implementation "org.koin:koin-android:2.0.0"

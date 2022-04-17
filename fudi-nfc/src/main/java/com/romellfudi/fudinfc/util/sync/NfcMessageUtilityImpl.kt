@@ -13,6 +13,9 @@ import com.romellfudi.fudinfc.util.constants.NfcHead
 import com.romellfudi.fudinfc.util.constants.NfcType
 import com.romellfudi.fudinfc.util.interfaces.NfcMessageUtility
 import java.nio.charset.Charset
+import kotlin.math.ceil
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 class NfcMessageUtilityImpl : NfcMessageUtility {
     /**
@@ -45,7 +48,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * Precondition :  UrlAddress should not be null
      */
     @Throws(FormatException::class)
-    override fun createUri(urlAddress: String): NdefMessage? {
+    override fun createUri(urlAddress: String): NdefMessage {
         return createUriMessage(urlAddress, NfcHead.HTTP_WWW)
     }
 
@@ -54,7 +57,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * Precondition :  Telephone should not be null
      */
     @Throws(FormatException::class)
-    override fun createTel(telephone: String): NdefMessage? {
+    override fun createTel(telephone: String): NdefMessage {
         var telephone = telephone
         telephone = if (telephone.startsWith("+")) "+" + telephone.replace(
             "\\D".toRegex(),
@@ -71,7 +74,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * Precondition :  At least number should not be null
      */
     @Throws(FormatException::class)
-    override fun createSms(number: String, message: String?): NdefMessage? {
+    override fun createSms(number: String, message: String?): NdefMessage {
         var number = number
         number = if (number.startsWith("+")) "+" + number.replace(
             "\\D".toRegex(),
@@ -90,13 +93,9 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * Precondition : lat- and longitude, max 6 decimals
      */
     @Throws(FormatException::class)
-    override fun createGeolocation(latitude: Double?, longitude: Double?): NdefMessage? {
-        var latitude = latitude
-        var longitude = longitude
-        latitude = Math.round(latitude!! * Math.pow(10.0, 6.0)) / Math.pow(10.0, 6.0)
-        longitude = Math.round(longitude!! * Math.pow(10.0, 6.0)) / Math.pow(10.0, 6.0)
-        val address = "geo:" + latitude.toFloat() + "," + longitude.toFloat()
-        val externalType = "nfclab.com:geoService"
+    override fun createGeolocation(latitude: Double?, longitude: Double?): NdefMessage {
+        val address = "geo:${latitude?.let {  (it * 10.0.pow(6.0)).roundToInt() / 10.0.pow(6.0) }}," +
+                "${longitude?.let { (it * 10.0.pow(6.0)).roundToInt() / 10.0.pow(6.0) }}"
         return createUriMessage(address, NfcHead.CUSTOM_SCHEME)
     }
 
@@ -106,12 +105,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      */
     @Throws(FormatException::class)
     override fun createEmail(recipient: String, subject: String?, message: String?): NdefMessage? {
-        var subject = subject
-        var message = message
-        subject = subject ?: ""
-        message = message ?: ""
-        val address = "$recipient?subject=$subject&body=$message"
-        return createUriMessage(address, NfcHead.MAILTO)
+        return createUriMessage("$recipient?subject=${subject ?: ""}&body=${message ?: ""}", NfcHead.MAILTO)
     }
 
     /**
@@ -119,7 +113,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * Precondition : macAddress should not be null
      */
     @Throws(FormatException::class)
-    override fun createBluetoothAddress(macAddress: String): NdefMessage? {
+    override fun createBluetoothAddress(macAddress: String): NdefMessage {
         val payload = convertBluetoothToNdefFormat(macAddress)
         val record = NdefRecord(NdefRecord.TNF_MIME_MEDIA, NfcType.BLUETOOTH_AAR, null, payload)
         return NdefMessage(record)
@@ -129,7 +123,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * {@inheritDoc}
      * Precondition : Text should not be null, encoded in UTF8
      */
-    override fun createText(text: String): NdefMessage? {
+    override fun createText(text: String): NdefMessage {
         val payload = ByteArray(text.toByteArray().size + 1)
         System.arraycopy(text.toByteArray(), 0, payload, 1, text.length)
         return createNdefMessage(
@@ -142,8 +136,8 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
      * {@inheritDoc}
      */
     @Throws(FormatException::class)
-    override fun createUri(urlAddress: String?, payloadHeader: Byte): NdefMessage? {
-        return createUriMessage(urlAddress!!, payloadHeader)
+    override fun createUri(urlAddress: String?, payloadHeader: Byte): NdefMessage {
+        return urlAddress?.let { createUriMessage(it, payloadHeader) } ?: throw FormatException()
     }
 
     /**
@@ -185,7 +179,7 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
             return res
         }
         for (i in 5 downTo 0) {
-            res[7 - i] = parts[i]!!.toInt(16).toByte()
+            res[7 - i] = parts[i]?.toInt(16)?.toByte() ?: 0
             println(res[5 - i])
         }
         res[0] = (res.size % 256).toByte()
@@ -194,9 +188,8 @@ class NfcMessageUtilityImpl : NfcMessageUtility {
     }
 
     companion object {
-        private val TAG = NfcMessageUtilityImpl::class.java.canonicalName
         private fun splitStringEvery(s: String, interval: Int): Array<String?> {
-            val arrayLength = Math.ceil(s.length / interval.toDouble()).toInt()
+            val arrayLength = ceil(s.length / interval.toDouble()).toInt()
             val result = arrayOfNulls<String>(arrayLength)
             var j = 0
             val lastIndex = result.size - 1
