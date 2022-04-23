@@ -39,12 +39,16 @@ abstract class Nfc : NfcToOperation {
     }
 
     override fun executeWriteOperation() {
-        if (nfcWriteUtility != null) {
-            GenericTask(asyncUiCallback, asyncOperationCallback!!, nfcWriteUtility!!)
-                .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-        } else {
-            GenericTask(asyncUiCallback, asyncOperationCallback!!)
-                .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        nfcWriteUtility?.let {
+            asyncOperationCallback?.let { callback ->
+                GenericTask(asyncUiCallback, callback, it)
+                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
+        } ?: run {
+            asyncOperationCallback?.let { callback ->
+                GenericTask(asyncUiCallback, callback)
+                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
         }
     }
 

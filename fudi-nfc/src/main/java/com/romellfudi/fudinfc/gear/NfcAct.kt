@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.forEach
 import com.romellfudi.fudinfc.util.interfaces.NfcMessageUtility
 import com.romellfudi.fudinfc.util.interfaces.NfcReadUtility
 import com.romellfudi.fudinfc.util.sync.NfcMessageUtilityImpl
@@ -53,7 +54,7 @@ abstract class NfcAct : AppCompatActivity(), CreateNdefMessageCallback {
         super.onResume()
         initAdapter()
         if (nfcAdapter != null) {
-            nfcAdapter!!.enableForegroundDispatch(this, pendingIntent, mIntentFilters, mTechLists)
+            nfcAdapter?.enableForegroundDispatch(this, pendingIntent, mIntentFilters, mTechLists)
             Log.d(TAG, "FGD enabled")
         }
     }
@@ -78,13 +79,13 @@ abstract class NfcAct : AppCompatActivity(), CreateNdefMessageCallback {
     override fun onPause() {
         super.onPause()
         if (nfcAdapter != null) {
-            nfcAdapter!!.disableForegroundDispatch(this)
+            nfcAdapter?.disableForegroundDispatch(this)
             Log.d(TAG, "FGD disabled")
         }
     }
 
     override fun createNdefMessage(event: NfcEvent): NdefMessage {
-        return NfcMessageUtilityImpl().createText("You're seeing this message because you have not overridden the createNdefMessage(NfcEvent event) in your activity.")!!
+        return NfcMessageUtilityImpl().createText("You're seeing this message because you have not overridden the createNdefMessage(NfcEvent event) in your activity.")
     }
 
     private fun initFields() {
@@ -92,7 +93,7 @@ abstract class NfcAct : AppCompatActivity(), CreateNdefMessageCallback {
             this,
             0,
             Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-            0
+            PendingIntent.FLAG_MUTABLE
         )
         mIntentFilters = arrayOf(IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED))
         mTechLists = arrayOf(
@@ -111,33 +112,24 @@ abstract class NfcAct : AppCompatActivity(), CreateNdefMessageCallback {
 
     protected fun enableBeam() {
         if (nfcAdapter != null) {
-            nfcAdapter!!.setNdefPushMessageCallback(this, this)
+            nfcAdapter?.setNdefPushMessageCallback(this, this)
             mBeamEnabled = true
             Log.d(TAG, "Beam enabled")
         }
     }
 
-    protected fun beamEnabled(): Boolean {
-        return mBeamEnabled
-    }
-
     protected fun disableBeam() {
         if (nfcAdapter != null) {
-            nfcAdapter!!.setNdefPushMessageCallback(null, this)
+            nfcAdapter?.setNdefPushMessageCallback(null, this)
             mBeamEnabled = false
             Log.d(TAG, "Beam disabled")
         }
     }
 
-    protected fun transformSparseArrayToArrayList(sparseArray: SparseArray<String?>?): List<String?> {
-        val list: MutableList<String?> = ArrayList(
-            sparseArray!!.size()
-        )
-        for (i in 0 until sparseArray.size()) {
-            list.add(sparseArray.valueAt(i))
+    protected fun transformSparseArrayToArrayList(sparseArray: SparseArray<String?>?) =
+        ArrayList<String?>(sparseArray?.size() ?: 0).apply {
+            sparseArray?.forEach { _, value -> add(value) }
         }
-        return list
-    }
 
     companion object {
         private val TAG = NfcAct::class.java.name

@@ -49,7 +49,7 @@ class WriteUriNfc : Nfc {
     }
 
     override fun executeWriteOperation(intent: Intent?, vararg args: Any?) {
-        if (!checkStringArguments(args.javaClass) || args.size != 1 || args[0] != "") {
+        if (!checkStringArguments(args.javaClass) || args.size != 1 || args[0] != "" || intent == null) {
             throw UnsupportedOperationException("Invalid arguments!")
         }
         asyncOperationCallback = object : OpCallback {
@@ -59,9 +59,9 @@ class WriteUriNfc : Nfc {
                 TagNotPresentException::class,
                 FormatException::class
             )
-            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
-                return writeUtility!!.writeUriToTagFromIntent((args[0] as String), intent!!)
-            }
+            override fun performWrite(writeUtility: NfcWriteUtility?) = (writeUtility?.apply {
+                writeUriToTagFromIntent((args[0] as String), intent)
+            } ?: false) as Boolean
         }
         super.executeWriteOperation()
     }

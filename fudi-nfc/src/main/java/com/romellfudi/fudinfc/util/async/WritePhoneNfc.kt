@@ -59,9 +59,9 @@ class WritePhoneNfc : Nfc {
                 TagNotPresentException::class,
                 FormatException::class
             )
-            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
-                return writeUtility!!.writeTelToTagFromIntent((args[0] as String), intent)
-            }
+            override fun performWrite(writeUtility: NfcWriteUtility?) = (writeUtility?.apply {
+                writeTelToTagFromIntent((args[0] as String), intent)
+            } ?: false) as Boolean
         }
         super.executeWriteOperation()
     }

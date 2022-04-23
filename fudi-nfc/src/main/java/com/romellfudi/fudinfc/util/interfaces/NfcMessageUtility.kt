@@ -17,7 +17,7 @@ interface NfcMessageUtility {
      * @return true if successful
      */
     @Throws(FormatException::class)
-    fun createUri(urlAddress: String): NdefMessage?
+    fun createUri(urlAddress: String): NdefMessage
 
     /**
      * Creates a telephone number - NdefMessage
@@ -27,7 +27,7 @@ interface NfcMessageUtility {
      * @return true if success
      */
     @Throws(FormatException::class)
-    fun createTel(telephone: String): NdefMessage?
+    fun createTel(telephone: String): NdefMessage
 
     /**
      * Create SMS - NdefMessage. Due to a bug in Android this is not correctly implemented by the OS.
@@ -39,7 +39,7 @@ interface NfcMessageUtility {
      * @return true if success
      */
     @Throws(FormatException::class)
-    fun createSms(number: String, message: String?): NdefMessage?
+    fun createSms(number: String, message: String?): NdefMessage
 
     /**
      * Creates a Geolocation - NdefMessage.
@@ -50,7 +50,7 @@ interface NfcMessageUtility {
      * @return true if success
      */
     @Throws(FormatException::class)
-    fun createGeolocation(latitude: Double?, longitude: Double?): NdefMessage?
+    fun createGeolocation(latitude: Double?, longitude: Double?): NdefMessage
 
     /**
      * Create recipient, subject and message email - NdefMessage
@@ -78,7 +78,7 @@ interface NfcMessageUtility {
         FormatException::class,
         ReadOnlyTagException::class
     )
-    fun createBluetoothAddress(macAddress: String): NdefMessage?
+    fun createBluetoothAddress(macAddress: String): NdefMessage
 
     /**
      * Create the message with plain text
@@ -87,12 +87,12 @@ interface NfcMessageUtility {
      * @throws FormatException
      */
     @Throws(FormatException::class)
-    fun createText(text: String): NdefMessage?
+    fun createText(text: String): NdefMessage
 
     /**
      * Create the address with the given header
      * @see .createUri
      */
     @Throws(FormatException::class)
-    fun createUri(urlAddress: String?, payloadHeader: Byte): NdefMessage?
+    fun createUri(urlAddress: String?, payloadHeader: Byte): NdefMessage
 }

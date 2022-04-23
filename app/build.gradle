@@ -5,15 +5,14 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.romellfudi.fudinfc.app"
         minSdkVersion 26
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 3
-        versionName "1.1.0"
+        versionName "1.2.0"
     }
     buildTypes {
         release {
@@ -33,6 +32,10 @@ android {
             outputFileName = "fudiNFC-app-${flavor}.apk"
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -41,16 +44,16 @@ dependencies {
     implementation project(':fudi-nfc')
 //    implementation 'com.romellfudi.fudinfc:fudi-nfc:1.0.a'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.android.support:design:29.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:1.6.0"
     implementation 'com.airbnb.android:lottie:3.7.0'
 
     implementation "org.koin:koin-android:2.0.0"
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 }
 repositories {
     mavenCentral()

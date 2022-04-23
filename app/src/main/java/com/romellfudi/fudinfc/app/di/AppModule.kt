@@ -29,12 +29,12 @@ val moduleNFC = module {
                 override fun onReturn(result: Boolean?) {
                     Timber.d("Received our result : $result")
                     if (mProgressDialog.isShowing) mProgressDialog.dismiss()
-                    if (result!!) Toast.makeText(mainActivity, "Write has been done!", Toast.LENGTH_SHORT).show()
+                    result?.run {Toast.makeText(mainActivity, "Write has been done!", Toast.LENGTH_SHORT).show()}
                 }
 
                 override fun onProgressUpdate(vararg values: Boolean?) {
                     Timber.i("Trying to write!")
-                    if (values.isNotEmpty() && values[0]!!) {
+                    if (values.isNotEmpty() && values[0] != null) {
                         mProgressDialog.setMessage("Writing")
                         Timber.i("Writing!!!")
                     }

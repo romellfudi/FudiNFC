@@ -59,13 +59,9 @@ class WriteSmsNfc : Nfc {
                 TagNotPresentException::class,
                 FormatException::class
             )
-            override fun performWrite(writeUtility: NfcWriteUtility?): Boolean {
-                return writeUtility!!.writeSmsToTagFromIntent(
-                    (args[0] as String),
-                    args[1] as String,
-                    intent
-                )
-            }
+            override fun performWrite(writeUtility: NfcWriteUtility?) = (writeUtility?.apply {
+                writeSmsToTagFromIntent(args[0] as String, args[1] as String, intent)
+            } ?: false) as Boolean
         }
         super.executeWriteOperation()
     }
