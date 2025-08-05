@@ -1,4 +1,7 @@
-<h1 align="center">
+![Gemini_Generated_Image_x46fykx46fykx46f](https://github.com/user-attachments/assets/75dcc5c6-c6fa-453a-ab03-a83a822c62a0)
+
+<h1
+ align="center">
   Fudi NFC
 </h1>
 
